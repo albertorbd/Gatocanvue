@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GatocanVueAPI
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -43,3 +44,7 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+=======
+# Gatocanvue
+Tienda online GatocandeAlberto
+>>>>>>> f686bd7280c3ffea5fa2e8678cd7bf13dbaa2628
