@@ -7,6 +7,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import AboutUs from '@/views/AboutUs.vue'
 import ContactView from '@/views/ContactView.vue'
+import AdminView from '@/views/AdminView.vue'
 
 
 const routes = [
@@ -22,6 +23,12 @@ const routes = [
     component: ProfileView,
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: AdminView,
+    meta: { requiresAdmin: true }
+  }
 ]
 
 const router = createRouter({

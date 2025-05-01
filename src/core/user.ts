@@ -1,6 +1,6 @@
 import type { Transaction } from "./transaction";
 
-export type UserRole = 'Admin' | 'User';
+export type UserRole = 'admin' | 'user';
 
 /** Modelo User según Gatocan.Model */
 export interface User {

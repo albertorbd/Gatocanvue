@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';    // :contentRe
 
 // 2. Importa los iconos que vas a usar
 import { faSignInAlt, faUserPlus, faUser } from '@fortawesome/free-solid-svg-icons';  // :contentReference[oaicite:7]{index=7}
+import { useAuthStore } from './stores/auth'
 
 // 3. Añade los iconos a la librería
 library.add(faSignInAlt, faUserPlus, faUser);
@@ -21,10 +22,15 @@ library.add(faSignInAlt, faUserPlus, faUser);
 dom.watch();
 
 
+
 const app = createApp(App)
 
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(createPinia())
+
+const authStore = useAuthStore();
+authStore.initialize();
+
 app.use(router)
 
 app.mount('#app')
