@@ -8,11 +8,13 @@ import WelcomeView from '@/views/WelcomeView.vue'
 import AboutUs from '@/views/AboutUs.vue'
 import ContactView from '@/views/ContactView.vue'
 import AdminView from '@/views/AdminView.vue'
+import RegisterView from '@/views/RegisterView.vue'
 
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/login', name: 'Login', component: LoginView },
+  { path: '/register', name: 'Register', component: RegisterView },
   { path: '/bienvenida', name: 'Bienvenida', component: WelcomeView },
   { path: '/products', name: 'Products', component: Products },
   { path: '/about-us', name: 'AboutUs', component: AboutUs },

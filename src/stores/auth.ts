@@ -57,6 +57,20 @@ export const useAuthStore = defineStore('auth', {
       this.initialize();
     },
 
+    async register(name: string, lastname: string, email: string, password: string) {
+      const { data } = await api.post<{ user: AuthUser; token: string }>('/auth/register', {
+        name,
+        lastname,
+        email,
+        password,
+      });
+      // Guarda token y user
+      this.token = data.token;
+      localStorage.setItem('jwt_token', data.token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+      this.user = data.user;
+    },
+
     logout() {
       this.token = '';
       this.user = null;
