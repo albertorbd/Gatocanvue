@@ -9,6 +9,7 @@ import AboutUs from '@/views/AboutUs.vue'
 import ContactView from '@/views/ContactView.vue'
 import AdminView from '@/views/AdminView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import CartView from '@/views/CartView.vue'
 
 
 const routes = [
@@ -20,9 +21,15 @@ const routes = [
   { path: '/about-us', name: 'AboutUs', component: AboutUs },
   { path: '/contact', name: 'Contact', component: ContactView },
 
+
   {
     path: '/profile',
     component: ProfileView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/cart',
+    component: CartView,
     meta: { requiresAuth: true },
   },
   {

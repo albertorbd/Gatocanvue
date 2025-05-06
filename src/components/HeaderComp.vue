@@ -24,6 +24,9 @@
         <button @click="handleProfileClick" class="header__icon-btn">
           <i class="fas fa-user"></i>
         </button>
+        <button @click="handleCartClick" class="header__icon-btn">
+        <i class="fas fa-shopping-cart"></i>
+      </button>
       </div>
 
       <AuthPromptModal
@@ -57,6 +60,14 @@
     showAuthPrompt.value = true;
   }
 }
+
+function handleCartClick() {
+  if (isAuthenticated.value) {
+    router.push('/cart');
+  } else {
+    showAuthPrompt.value = true;
+  }
+}
   </script>
   
   <style scoped>
@@ -70,13 +81,13 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   
-  /* Secciones iguales divididas en tres áreas */
+  
   .header__section {
     display: flex;
     align-items: center;
   }
   
-  /* Logo a la izquierda */
+ 
   .header__logo {
     flex: 1;
   }
@@ -87,7 +98,7 @@
     text-decoration: none;
   }
   
-  /* Navegación centrada */
+  
   .header__nav {
     flex: 2;
     justify-content: center;
@@ -106,7 +117,7 @@
     border-bottom: 2px solid #42b983;
   }
   
-  /* Acciones a la derecha */
+ 
   .header__actions {
     flex: 1;
     justify-content: flex-end;
