@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia';
 import api from '@/services/api';
 import type { User, UserUpdateDto } from '@/core/user';
+import { useAuthStore } from './auth';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -23,6 +24,13 @@ export const useUserStore = defineStore('user', {
     async fetchAllUsers() {
       const { data } = await api.get<User[]>('/user');
       this.users = data;
+    },
+
+    async deleteMyAccount() {
+      const auth = useAuthStore();
+      if (!auth.user) throw new Error('Usuario no autenticado');
+      await api.delete(`/user/${auth.user.id}`);
+      auth.logout();
     },
   },
 });

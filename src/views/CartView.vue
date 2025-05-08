@@ -41,6 +41,11 @@
           <button class="btn btn-clear" @click="clearCart">
             Vaciar Carrito
           </button>
+
+    <button class="btn btn-purchase" @click="buyCart">
+     Comprar carrito
+     </button>
+         
         </div>
       </div>
     </div>
@@ -51,14 +56,15 @@
   import { useCartStore } from '@/stores/cartStore';
   import type { CartItem } from '@/core/cart';
   import type { CartUpdateDto } from '@/core/cart';
+  import { useTransactionStore } from '@/stores/transaction.ts';
   
   const cartStore = useCartStore();
   const loading = ref(true);
-  
+  const txStore   = useTransactionStore();
+  const buying     = ref(false);
   
   const quantities = ref<Record<number, number>>({});
   
-  // Computed para el carrito y total
   const cart = computed(() => cartStore.cart);
   const total = computed(() => {
     if (!cart.value) return 0;
@@ -68,7 +74,7 @@
     );
   });
   
-  // Al montar, cargar el carrito y preparar cantidades
+  
   onMounted(async () => {
     await cartStore.fetchCart();
     if (cartStore.cart) {
@@ -98,6 +104,40 @@
     await cartStore.clearCart();
     quantities.value = {};
   }
+
+  async function buyCart() {
+  if (!cart.value || !cart.value.items.length) return;
+
+  buying.value = true;
+  try {
+    
+    const purchases = cart.value.items.map(i => ({
+      userId:        cartStore.cart!.userId,
+      productId:     i.productId,
+      quantity:      i.quantity,
+      paymentMethod: 'App'
+    }));
+
+    
+    for (const p of purchases) {
+      await txStore.purchase(p);
+    }
+
+    
+    await cartStore.clearCart();
+
+   
+    quantities.value = {};
+
+   
+    alert('Compra realizada con éxito');
+  } catch (err) {
+    console.error('Error comprando carrito:', err);
+    alert('Error al procesar la compra');
+  } finally {
+    buying.value = false;
+  }
+}
   </script>
   
   <style scoped>
@@ -183,4 +223,13 @@
   .btn-clear:hover {
     background: #4a5568;
   }
+
+  .btn-purchase {
+  margin-left: 0.5rem;
+  background-color: #3182ce;
+  color: white;
+}
+.btn-purchase:hover {
+  background-color: #2b6cb0;
+}
   </style>

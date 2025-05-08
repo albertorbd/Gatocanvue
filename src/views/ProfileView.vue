@@ -1,10 +1,10 @@
 
-<!-- src/views/ProfileView.vue -->
+
 <template>
   <div class="profile" v-if="authStore.user">
     <div class="profile-header">
       <h1>Mi Perfil</h1>
-      <!-- Botón Admin View solo si el usuario autenticado es Admin -->
+      
       <button
         v-if="authStore.user.role === 'admin'"
         class="admin-view-btn"
@@ -12,6 +12,11 @@
       >
         Admin View
       </button>
+      <button
+      class="delete-account-header-btn"
+      @click="deleteAccount">
+      Eliminar cuenta
+    </button>
     </div>
 
     <p><strong>ID:</strong> {{ userStore.profile?.id }}</p>
@@ -30,6 +35,20 @@
         {{ tx.tipo }} – {{ tx.amount.toFixed(2) }}€ el {{ new Date(tx.date).toLocaleDateString() }}
       </li>
     </ul>
+
+    <h2 class="purchased-title">Productos Comprados</h2>
+<ul class="purchased-list">
+  <li v-for="prod in purchased" :key="prod.id" class="purchased-item">
+    <img :src="prod.imageUrl" alt="" class="purchased-item__img" />
+    <div class="purchased-item__info">
+      <h3>{{ prod.name }}</h3>
+      <p>${{ prod.price.toFixed(2) }}</p>
+    </div>
+  </li>
+  <li v-if="!purchased.length" class="empty-purchased">
+    No has comprado productos aún.
+  </li>
+</ul>
 
     <button @click="logout" class="logout-btn">Cerrar sesión</button>
 
@@ -59,6 +78,7 @@ const txStore = useTransactionStore();
 
 const showDepositModal = ref(false);
 const balance = computed(() => userStore.profile?.balance ?? 0);
+const purchased = computed(() => txStore.purchasedProducts);
 
 function openDeposit() {
   showDepositModal.value = true;
@@ -69,6 +89,7 @@ async function onDeposit(amount: number) {
   if (!id) return;
   await txStore.deposit(id, amount, 'App');
   await userStore.fetchProfile(id);
+  await txStore.fetchPurchasedProducts(id);
 }
 
 function logout() {
@@ -85,7 +106,18 @@ onMounted(async () => {
   if (!id) return;
   await userStore.fetchProfile(id);
   await txStore.fetchByUser(id);
+  await txStore.fetchPurchasedProducts(id);
+
 });
+
+async function deleteAccount() {
+  const id = authStore.user?.id;
+  if (!id) return;
+  if (!confirm('¿Eliminar tu cuenta? Esta acción es irreversible.')) return;
+  await userStore.deleteMyAccount();
+  authStore.logout();
+  router.push({ name: 'Register' });
+}
 </script>
 
 <style scoped>
@@ -162,6 +194,82 @@ onMounted(async () => {
   cursor: pointer;
 }
 .logout-btn:hover {
+  background-color: #c53030;
+}
+
+.purchased-title {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+
+.purchased-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+
+.purchased-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.purchased-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.purchased-item__img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+
+.purchased-item__info {
+  padding: 0.75rem;
+  text-align: center;
+}
+.purchased-item__info h3 {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+  color: #2d3748;
+}
+.purchased-item__info p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+
+.empty-purchased {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #718096;
+  font-style: italic;
+  padding: 1rem 0;
+}
+.delete-account-header-btn {
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.delete-account-header-btn:hover {
   background-color: #c53030;
 }
 </style>
