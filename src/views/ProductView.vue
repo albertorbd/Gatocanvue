@@ -10,7 +10,7 @@
         <p><strong>Marca:</strong> {{ producto.brand }}</p>
         <p><strong>Stock:</strong> {{ producto.stock }}</p>
         <p>{{ producto.description }}</p>
-        <!-- Botón Añadir al carrito -->
+       
         <button @click="addToCart(producto.id)" class="btn-add-cart">
           Añadir al carrito
         </button>

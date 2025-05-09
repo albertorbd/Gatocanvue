@@ -72,10 +72,14 @@ function handleCartClick() {
   
   <style scoped>
   .header {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 60px;
+    padding-right: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1.5rem;
+  
     height: 4rem;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);

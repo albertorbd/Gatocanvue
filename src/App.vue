@@ -21,7 +21,5 @@ import HeaderComp from './components/HeaderComp.vue';
 }
 
 /* Contenido principal */
-.main-content {
-  padding: 6rem 2rem 2rem 2rem; /* Ajusta según la altura de tu encabezado */
-}
+
 </style>

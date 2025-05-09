@@ -1,0 +1,46 @@
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+.hero {
+    margin-top: 0;
+    background: url('inicio.jpg') center center / cover no-repeat;
+    position: relative;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero__overlay {
+    margin-top: 100px;
+    margin-left: 1000px;
+    background-color: rgba(180, 128, 128, 0.4);
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .hero__title {
+    margin: 0;
+    color: #fff;
+    font-size: 3rem;   
+    line-height: 1.2;
+  }
+  
+  .hero__subtitle {
+    margin-top: 1rem;
+    color: #eee;
+    font-size: 1.25rem;
+  }
+
+  .hero_btn {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 999px;          
+    text-transform: none;         
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
