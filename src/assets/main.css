@@ -2,7 +2,11 @@ html, body {
     margin: 0;
     padding: 0;
   }
+p{
+  font-size: 20px;
+}
 
+/*Inicio*/
 .hero {
     margin-top: 0;
     background: url('inicio.jpg') center center / cover no-repeat;
@@ -44,3 +48,139 @@ html, body {
     text-transform: none;         
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
+
+  .inicio-products{
+   padding-bottom: 60px; 
+  }
+.product-card {
+  max-width: 340px;
+  height: 400px;
+  margin: auto;
+  transition: transform .2s, box-shadow .2s;
+}
+.product-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.add-btn {
+  background-color: white !important;
+  color: red !important;
+  text-transform: none;
+}
+
+ .add-btn:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.subtitle-1{
+  font-size: 17px;
+  padding-top: 3px;
+}
+
+.home-product-tittle{
+text-align: center;
+font-size: 45px;
+padding-top: 60px;
+font-weight: 700;
+padding-bottom: 10px;
+}
+
+.home-product-p{
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 100px;
+}
+
+.services-section {
+  background-color: #f5f5f5;
+}
+.service-card {
+  background-color: white;
+  transition: transform .2s, box-shadow .2s;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hero-2 {
+    margin-top: 0;
+    background: url('about-us.jpg') center center / cover no-repeat;
+    position: relative;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-us {
+  padding: 4rem 0;
+  background-color: #f9f9f9;
+}
+
+.about-us__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.about-us__text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.about-us__image {
+  border-radius: 8px;
+}
+
+
+.about-us {
+  padding: 4rem 0;
+  background-color: #f9f9f9;
+}
+
+.about-us__title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.about-us__text {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.about-us__image {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.team-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+.faq-section {
+  background-color: #fafafa;
+}
+
+.faq-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.faq-item > .d-flex {
+  cursor: pointer;
+}
+.faq-toggle {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+  color: white;
+}

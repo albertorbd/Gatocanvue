@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/images': {
-        target: 'https://localhost:7209',
+        target: 'http://localhost:7018',
         changeOrigin: true,
         secure: false,
       },
