@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -10,6 +10,7 @@ import ContactView from '@/views/ContactView.vue'
 import AdminView from '@/views/AdminView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import CartView from '@/views/CartView.vue'
+import ProductDetail from '@/views/ProductDetail.vue'
 
 
 const routes = [
@@ -20,8 +21,14 @@ const routes = [
   { path: '/products', name: 'Products', component: Products },
   { path: '/about-us', name: 'AboutUs', component: AboutUs },
   { path: '/contact', name: 'Contact', component: ContactView },
-
-
+   {
+    path: '/products/:id',
+    name: 'ProductDetail',
+    component: ProductDetail,
+    props: (route: RouteLocationNormalized): { id: number } => ({
+      id: Number(route.params.id)
+    })
+  },
   {
     path: '/profile',
     component: ProfileView,

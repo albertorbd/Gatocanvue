@@ -1,11 +1,11 @@
 <template>
     <header class="header">
-      <!-- Logo -->
+     
       <div class="header__section header__logo">
         <router-link to="/" class="header__logo-link">Gatocan</router-link>
       </div>
   
-      <!-- Menú de navegación -->
+      
       <nav class="header__section header__nav">
         <router-link to="/" class="header__link">Inicio</router-link>
         <router-link to="/about-us" class="header__link">Quiénes somos</router-link>
@@ -13,14 +13,12 @@
         <router-link to="/contact" class="header__link">Contacto</router-link>
       </nav>
   
-      <!-- Iconos de usuario -->
+      
       <div class="header__section header__actions">
         <button @click="handleLoginClick" class="header__icon-btn">
           <i class="fas fa-sign-in-alt"></i>
         </button>
-        <button v-if="!isAuthenticated" @click="handleRegisterClick" class="header__icon-btn">
-          <i class="fas fa-user-plus"></i>
-        </button>
+
         <button @click="handleProfileClick" class="header__icon-btn">
           <i class="fas fa-user"></i>
         </button>
@@ -51,9 +49,7 @@
   function handleLoginClick() {
     router.push(isAuthenticated.value ? '/bienvenida' : '/login');
   }
-  function handleRegisterClick() {
-    router.push('/register');
-  }
+  
   function handleProfileClick() {
     if (isAuthenticated.value) router.push('/profile');
     else {

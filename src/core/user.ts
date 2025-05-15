@@ -11,7 +11,8 @@ export interface User {
   password?: string;    
   balance: number;
   role: UserRole;
-  
+   address?: string;  
+  phone?: string;    
   transactions?: Transaction[];
 }
 
@@ -26,7 +27,8 @@ export interface UserCreateDto {
 /** DTO para actualizar un usuario */
 export interface UserUpdateDto {
   name?: string;
-  lastname?: string;
   email?: string;
   password?: string;
+  address?: string;  
+  phone?: string;   
 }

@@ -8,12 +8,30 @@ type ProductUpdate = Omit<Product, 'id'>;
 export const useProductStore = defineStore('product', {
   state: () => ({
     products: [] as Product[],
+    currentProduct: null as Product | null,
+    searchQuery: '',
+    selectedBrand: '',
+    selectedCategory: '',
+    priceOrder: '',
   }),
 
   actions: {
-    async fetchAllProducts() {
-      const { data } = await api.get<Product[]>('/product');
+     async fetchAllProducts() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const params: Record<string, any> = {};
+
+      if (this.searchQuery) params.search = this.searchQuery;
+      if (this.selectedBrand) params.brands = [this.selectedBrand];
+      if (this.selectedCategory) params.categories = [this.selectedCategory];
+      if (this.priceOrder) params.priceOrder = this.priceOrder;
+
+      const { data } = await api.get<Product[]>('/product', { params });
       this.products = data;
+    },
+
+     async fetchProductById(id: number) {     
+      const { data } = await api.get<Product>(`/product/${id}`);
+      this.currentProduct = data;
     },
 
     async createProduct(payload: ProductCreate) {
@@ -29,6 +47,22 @@ export const useProductStore = defineStore('product', {
     async deleteProduct(id: number) {
       await api.delete(`/product/${id}`);
       await this.fetchAllProducts();
+    },
+
+    setSearchQuery(query: string) {
+      this.searchQuery = query;
+    },
+
+    setSelectedBrand(brand: string) {
+      this.selectedBrand = brand;
+    },
+
+    setSelectedCategory(category: string) {
+      this.selectedCategory = category;
+    },
+
+    setPriceOrder(order: string) {
+      this.priceOrder = order;
     },
   },
 });

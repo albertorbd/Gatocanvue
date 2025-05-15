@@ -64,51 +64,55 @@
       </v-row>
 </section>
 
-<section class="services-section py-12">
-      <h2 class="text-h4 font-weight-bold text-center mb-8">Nuestros servicios</h2>
-      <v-row class="px-6" align="stretch" dense :gutter="24">
-       
-        <v-col cols="12" sm="6" md="3" class="pa-4">
-          <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
-            <v-img src="/src/assets/adiestramiento.jpg" height="300"  cover class="mb-4"/>
-            <div class="text-h6 font-weight-medium mb-2">Adiestramiento de perros</div>
-            <div class="subtitle-2 text--secondary">Clases personalizadas para tu mascota</div>
-          </v-card>
-        </v-col>
-        
-        <v-col cols="12" sm="6" md="3" class="pa-4">
-          <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
-            <v-img src="/src/assets/veterinario.jpg" height="300"  cover class="mb-4"/>
-            <div class="text-h6 font-weight-medium mb-2">Veterinario</div>
-            <div class="subtitle-2 text--secondary">Revisión y atención sanitaria</div>
-          </v-card>
-        </v-col>
-        
-        <v-col cols="12" sm="6" md="3" class="pa-4">
-          <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
-            <v-img src="/src/assets/alojamiento.jpg" height="300" cover class="mb-4"/>
-            <div class="text-h6 font-weight-medium mb-2">Alojamiento para animales</div>
-            <div class="subtitle-2 text--secondary">Cuidados y confort 24/7</div>
-          </v-card>
-        </v-col>
-       
-        <v-col cols="12" sm="6" md="3" class="pa-4">
-          <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
-            <v-img src="/src/assets/paseo.jpg" height="300" cover class="mb-4"/>
-            <div class="text-h6 font-weight-medium mb-2">Paseos caninos</div>
-            <div class="subtitle-2 text--secondary">Rutas diarias y diversión</div>
-          </v-card>
-        </v-col>
+ <section class="services-section py-12">
+    <h2 class="text-h4 font-weight-bold text-center mb-8">Nuestros servicios</h2>
 
-          <v-col cols="12" sm="6" md="3" class="pa-4">
-          <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
-            <v-img src="/src/assets/peluqueria.jpg" height="300" cover class="mb-4"/>
-            <div class="text-h6 font-weight-medium mb-2">Peluquería</div>
-            <div class="subtitle-2 text--secondary">Tu perro tendrá el mejor flow</div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </section>
+   
+    <v-row class="px-6" align="stretch" dense :gutter="24">
+      <v-col cols="12" sm="6" md="4" class="pa-4">
+        <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
+          <v-img src="/src/assets/adiestramiento.jpg" height="300" cover class="mb-4"/>
+          <div class="text-h6 font-weight-medium mb-2">Adiestramiento de perros</div>
+          <div class="subtitle-2 text--secondary">Clases personalizadas para tu mascota</div>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" sm="6" md="4" class="pa-4">
+        <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
+          <v-img src="/src/assets/veterinario.jpg" height="300" cover class="mb-4"/>
+          <div class="text-h6 font-weight-medium mb-2">Veterinario</div>
+          <div class="subtitle-2 text--secondary">Revisión y atención sanitaria</div>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" sm="6" md="4" class="pa-4">
+        <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
+          <v-img src="/src/assets/alojamiento.jpg" height="300" cover class="mb-4"/>
+          <div class="text-h6 font-weight-medium mb-2">Alojamiento para animales</div>
+          <div class="subtitle-2 text--secondary">Cuidados y confort 24/7</div>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    
+    <v-row class="px-6 mt-6" justify="center" align="stretch" dense :gutter="24">
+      <v-col cols="12" sm="6" md="4" class="pa-4">
+        <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
+          <v-img src="/src/assets/paseo.jpg" height="300" cover class="mb-4"/>
+          <div class="text-h6 font-weight-medium mb-2">Paseos caninos</div>
+          <div class="subtitle-2 text--secondary">Rutas diarias y diversión</div>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" sm="6" md="4" class="pa-4">
+        <v-card elevation="2" outlined rounded="lg" class="service-card pa-6 text-center">
+          <v-img src="/src/assets/peluqueria.jpg" height="300" cover class="mb-4"/>
+          <div class="text-h6 font-weight-medium mb-2">Peluquería</div>
+          <div class="subtitle-2 text--secondary">Tu perro tendrá el mejor flow</div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </section>
 
      <section class="testimonials-section py-12">
     <h2 class="text-h4 font-weight-bold text-center mb-10">
