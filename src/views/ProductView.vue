@@ -3,7 +3,7 @@
     <h1 class="product-title">Nuestros Productos</h1>
 
     <div class="product-content">
-     
+      <!-- Filtros -->
       <aside class="filters">
         <input
           v-model="productStore.searchQuery"
@@ -33,24 +33,40 @@
         </select>
       </aside>
 
-      
+     
       <section class="product-list">
         <ul class="product-ul">
-          <li v-for="producto in productStore.products" :key="producto.id" class="product-item">
+          <li
+            v-for="producto in productStore.products"
+            :key="producto.id"
+            class="product-item"
+          >
+            
             <div class="image-container">
               <img :src="producto.imageUrl" alt="Imagen del producto" />
             </div>
+
+            
             <div class="product-info">
-              <h2>{{ producto.name }}</h2>
-              <p>{{ producto.description }}</p>
-              <p><strong>Categoría:</strong> {{ producto.category }}</p>
-              <p><strong>Marca:</strong> {{ producto.brand }}</p>
+              <h2 class="product-name">{{ producto.name }}</h2>
+              <div class="product-tags">
+                <v-chip small outlined class="mr-1">{{ producto.category }}</v-chip>
+                <v-chip small outlined>{{ producto.brand }}</v-chip>
+              </div>
+              <p class="product-desc">{{ producto.description }}</p>
             </div>
+
+           
             <div class="product-footer">
-              <span class="product-price">€{{ producto.price.toFixed(2) }}</span>
-              <button @click="addToCart(producto.id)" class="btn-add-cart">
-                Añadir al carrito
-              </button>
+              <span class="product-price">{{ producto.price.toFixed(2) }}€</span>
+              <div class="product-buttons">
+                <button class="btn-add-cart" @click="addToCart(producto.id)">
+                  Añadir al carrito
+                </button>
+                <button class="btn-view-more" @click="goToProduct(producto.id)">
+                  Ver más
+                </button>
+              </div>
             </div>
           </li>
         </ul>
@@ -64,10 +80,12 @@ import { onMounted, computed, watch } from 'vue';
 import { useProductStore } from '@/stores/productstore';
 import { useCartStore } from '@/stores/cartStore';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
 const authStore = useAuthStore();
+const router = useRouter();
 
 const addToCart = async (productId: number) => {
   if (!authStore.user) {
@@ -82,7 +100,12 @@ const addToCart = async (productId: number) => {
   }
 };
 
+const goToProduct = (id: number) => {
+  router.push({ name: 'ProductDetail', params: { id } });
+};
+
 onMounted(() => {
+  productStore.resetFilters();
   productStore.fetchAllProducts();
 });
 
@@ -110,9 +133,8 @@ const uniqueCategories = computed(() => {
 </script>
 
 <style scoped>
-
 .product-container {
-  background-color: #f5f5f5; 
+  background-color: #f5f5f5;
   padding: 20px;
 }
 
@@ -121,10 +143,10 @@ const uniqueCategories = computed(() => {
   margin-bottom: 20px;
 }
 
-
 .product-content {
   display: flex;
 }
+
 
 .filters {
   width: 25%;
@@ -133,11 +155,6 @@ const uniqueCategories = computed(() => {
   border-radius: 8px;
   margin-right: 20px;
 }
-
-.product-list {
-  width: 75%;
-}
-
 
 .search-bar,
 .filter-select {
@@ -149,39 +166,44 @@ const uniqueCategories = computed(() => {
 }
 
 .filter-select {
-  background-color: #ff4d4d; 
+  background-color: #ff4d4d;
   color: white;
 }
 
 
+.product-list {
+  width: 75%;
+}
+
 .product-ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
+
 .product-item {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 16px; 
-  width: calc(33.333% - 20px); 
-  min-height: 500px; 
   box-sizing: border-box;
+  width: calc(33.333% - 20px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   transition: transform 0.2s;
+}
+
+.product-item:hover {
+  transform: translateY(-4px);
 }
 
 .image-container {
   width: 100%;
-  height: 250px; 
+  height: 250px;
   overflow: hidden;
   border-bottom: 1px solid #ccc;
-  margin-bottom: 16px; 
 }
 
 .image-container img {
@@ -190,37 +212,80 @@ const uniqueCategories = computed(() => {
   object-fit: contain;
 }
 
-.product-details {
-  flex-grow: 1;
-  padding: 8px 0;
-}
-
+/* contenido principal */
 .product-info {
+  padding: 16px;
   flex-grow: 1;
 }
 
+.product-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-tags {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.product-tags .v-chip {
+  font-size: 0.75rem;
+  height: 24px;
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: #555;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* pie de tarjeta */
 .product-footer {
+  padding: 16px;
+  border-top: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .product-price {
-  text-align: right;
   font-weight: bold;
-  padding-top: 8px; 
+  color: #d82108;
 }
 
-.btn-add-cart {
-  padding: 0.5rem 1rem;
-  background-color: #d82108;
-  color: white;
+.product-buttons button + button {
+  margin-left: 8px;
+}
+
+/* estilos botones */
+.btn-add-cart,
+.btn-view-more {
+  padding: 0.4rem 0.8rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
+.btn-add-cart {
+  background-color: #d82108;
+  color: white;
+}
+
 .btn-add-cart:hover {
-  background-color: #000000;
+  background-color: #b71c1c;
+}
+
+.btn-view-more {
+  background: transparent;
+  color: #d82108;
+  border: 1px solid #d82108;
+}
+
+.btn-view-more:hover {
+  background-color: #fce4ec;
 }
 </style>

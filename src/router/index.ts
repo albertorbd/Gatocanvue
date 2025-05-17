@@ -11,6 +11,8 @@ import AdminView from '@/views/AdminView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import CartView from '@/views/CartView.vue'
 import ProductDetail from '@/views/ProductDetail.vue'
+import CheckoutView from '@/views/CheckoutView.vue'
+
 
 
 const routes = [
@@ -21,6 +23,21 @@ const routes = [
   { path: '/products', name: 'Products', component: Products },
   { path: '/about-us', name: 'AboutUs', component: AboutUs },
   { path: '/contact', name: 'Contact', component: ContactView },
+
+  {
+  path: '/deposit',
+  name: 'Deposit',
+  component: () => import('@/views/DepositModal.vue'),
+  meta: { requiresAuth: true }
+},
+
+{
+  path: '/checkout',
+  name: 'Checkout',
+  component: CheckoutView,
+  meta: { requiresAuth: true }
+},
+
    {
     path: '/products/:id',
     name: 'ProductDetail',
@@ -31,6 +48,7 @@ const routes = [
   },
   {
     path: '/profile',
+     name: 'Profile',
     component: ProfileView,
     meta: { requiresAuth: true },
   },

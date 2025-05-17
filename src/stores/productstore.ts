@@ -16,23 +16,30 @@ export const useProductStore = defineStore('product', {
   }),
 
   actions: {
-     async fetchAllProducts() {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const params: Record<string, any> = {};
 
-      if (this.searchQuery) params.search = this.searchQuery;
-      if (this.selectedBrand) params.brands = [this.selectedBrand];
-      if (this.selectedCategory) params.categories = [this.selectedCategory];
-      if (this.priceOrder) params.priceOrder = this.priceOrder;
 
-      const { data } = await api.get<Product[]>('/product', { params });
-      this.products = data;
+    resetFilters() {
+      this.searchQuery = '';
+      this.selectedBrand = '';
+      this.selectedCategory = '';
+      this.priceOrder = '';
     },
+  async fetchAllProducts() {
+  const params: Record<string,string|string[]> = {};
+  if (this.searchQuery)      params.search     = this.searchQuery;
+  if (this.selectedBrand)    params.brands     = [this.selectedBrand];
+  if (this.selectedCategory) params.categories = [this.selectedCategory];
+  if (this.priceOrder)       params.priceOrder = this.priceOrder;
 
-     async fetchProductById(id: number) {     
-      const { data } = await api.get<Product>(`/product/${id}`);
-      this.currentProduct = data;
-    },
+  const { data } = await api.get<Product[]>('/product', { params });
+  this.products = data;
+},
+
+  async fetchProductById(id: number) {     
+   const { data } = await api.get<Product>(`/product/${id}`);
+  this.currentProduct = data;
+},
+
 
     async createProduct(payload: ProductCreate) {
       await api.post('/product', payload);

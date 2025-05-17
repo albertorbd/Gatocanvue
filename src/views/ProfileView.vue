@@ -61,7 +61,7 @@
             <div class="balance-amount">{{ balance.toFixed(2) }}€</div>
           </div>
           <v-spacer />
-          <v-btn color="red" dark class="add-balance" @click="openDeposit">+</v-btn>
+         <v-btn color="red" dark class="add-balance" @click="goToDepositPage">+</v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -69,7 +69,7 @@
     
     <v-row class="mt-8">
       <v-col cols="12">
-        <h2 class="section-title">Productos comprados</h2>
+        <h2 class="section-title">Pedidos realizados</h2>
         <v-divider class="mb-4" />
         <v-row dense>
           <v-col
@@ -191,11 +191,7 @@
   </v-card>
 </v-dialog>
     
-    <DepositModal
-      :visible="showDepositModal"
-      @close="showDepositModal = false"
-      @deposit="onDeposit"
-    />
+   
   </v-container>
 </template>
 
@@ -205,7 +201,6 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/userStore';
 import { useTransactionStore } from '@/stores/transaction';
-import DepositModal from '@/components/DepositModal.vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -214,7 +209,6 @@ const txStore = useTransactionStore();
 const showEdit = ref(false);
 const showPhoneEdit = ref(false);
 const showAddressEdit = ref(false);
-const showDepositModal = ref(false);
 const editName = ref('');
 const editPassword = ref('');
 const editEmail = ref('');
@@ -245,15 +239,11 @@ function logout() {
 function goAdmin() {
   router.push({ name: 'Admin' });
 }
-function openDeposit() {
-  showDepositModal.value = true;
-}
-async function onDeposit(amount: number) {
-  const id = authStore.user?.id;
-  if (!id) return;
-  await txStore.deposit(id, amount, 'App');
-  await userStore.fetchProfile(id);
-  await txStore.fetchPurchasedProducts(id);
+
+
+
+function goToDepositPage() {
+  router.push({ name: 'Deposit' }); 
 }
 async function submitEdit() {
   const id = authStore.user?.id;

@@ -42,9 +42,9 @@
             Vaciar Carrito
           </button>
 
-    <button class="btn btn-purchase" @click="buyCart">
-     Comprar carrito
-     </button>
+    <button
+class="btn btn-purchase"   @click="goToCheckout">
+   Comprar carrito </button>
          
         </div>
       </div>
@@ -56,12 +56,11 @@
   import { useCartStore } from '@/stores/cartStore';
   import type { CartItem } from '@/core/cart';
   import type { CartUpdateDto } from '@/core/cart';
-  import { useTransactionStore } from '@/stores/transaction.ts';
+  import { useRouter } from 'vue-router';
   
   const cartStore = useCartStore();
   const loading = ref(true);
-  const txStore   = useTransactionStore();
-  const buying     = ref(false);
+  const router = useRouter()
   
   const quantities = ref<Record<number, number>>({});
   
@@ -93,51 +92,21 @@
   await cartStore.updateQuantity(dto);
 }
   
-  // Llama al store para eliminar un ítem
+  
   async function removeItem(productId: number) {
     await cartStore.removeFromCart(productId);
     delete quantities.value[productId];
   }
   
-  // Llama al store para vaciar el carrito
+ 
   async function clearCart() {
     await cartStore.clearCart();
     quantities.value = {};
   }
-
-  async function buyCart() {
-  if (!cart.value || !cart.value.items.length) return;
-
-  buying.value = true;
-  try {
-    
-    const purchases = cart.value.items.map(i => ({
-      userId:        cartStore.cart!.userId,
-      productId:     i.productId,
-      quantity:      i.quantity,
-      paymentMethod: 'App'
-    }));
-
-    
-    for (const p of purchases) {
-      await txStore.purchase(p);
-    }
-
-    
-    await cartStore.clearCart();
-
-   
-    quantities.value = {};
-
-   
-    alert('Compra realizada con éxito');
-  } catch (err) {
-    console.error('Error comprando carrito:', err);
-    alert('Error al procesar la compra');
-  } finally {
-    buying.value = false;
-  }
+  function goToCheckout() {
+  router.push({ name: 'Checkout' })
 }
+
   </script>
   
   <style scoped>

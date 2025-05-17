@@ -166,6 +166,7 @@ const productStore = useProductStore()
 const { products: productos } = storeToRefs(productStore)
 
 onMounted(() => {
+  productStore.resetFilters()
   productStore.fetchAllProducts()
 })
 
