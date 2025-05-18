@@ -38,6 +38,8 @@ const routes = [
   meta: { requiresAuth: true }
 },
 
+
+
    {
     path: '/products/:id',
     name: 'ProductDetail',
@@ -62,6 +64,11 @@ const routes = [
     name: 'Admin',
     component: AdminView,
     meta: { requiresAdmin: true }
+  },
+
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
 ]
 

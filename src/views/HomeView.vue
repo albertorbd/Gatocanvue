@@ -8,60 +8,52 @@
   </section>
 
   <section class="inicio-products">
-  <h2 class="home-product-tittle">Nuestros productos</h2>
-  <p class="home-product-p">Contamos con las mejores marcas.</p>
+  <h2 class="home-product-title">Nuestros productos</h2>
+  <p class="home-product-subtitle">Contamos con las mejores marcas.</p>
 
-  
-       <v-row class="px-6" align="stretch" dense :gutter="24">
-        <v-col
-          v-for="producto in productos"
-          :key="producto.id"
-          cols="12"
-          sm="6"
-          md="4"
-          class="pa-4"
-        >
-          <v-card
-            class="product-card"
-            color="red lighten-5"
-            elevation="4"
-            rounded="lg"
-            hover
+  <v-row class="products-row px-4" 
+  dense
+  justify="space-evenly"
+  align="stretch">
+    <v-col
+      v-for="producto in productos"
+      :key="producto.id"
+      cols="8"
+      sm="4"
+      md="4"
+      class="pa-5"
+    >
+      <v-card class="product-card" elevation="2" rounded="xl" hover>
+        
+        <v-img
+          :src="producto.imageUrl"
+          class="card-image"
+          cover
+          eager
+        />
+
+        
+        <v-card-text class="card-content">
+          <div class="card-title">{{ producto.name }}</div>
+        </v-card-text>
+
+       
+        <v-card-actions class="card-actions">
+          <v-btn
+            :to="`/products/${producto.id}`"
+            class="btn-view"
+            small
+            rounded
           >
-            
-            <v-img
-              :src="producto.imageUrl"
-              height="250px"
-              class="grey lighten-4"
-              cover
-              eager/>
-
-           <v-card-title class="py-6 d-flex justify-space-between align-center px-3">
-              <span class="text-h6 font-weight-bold text-center flex-grow-1">
-                {{ producto.name }}
-              </span>
-              <span class="subtitle-1 font-weight-medium">
-                {{ producto.price.toFixed(2) }}€
-              </span>
-            </v-card-title>
-
-            
-           
-
-            
-        <v-card-actions class="justify-center pb-4 pt-5">
-        <v-btn
-        :to="`/products/${producto.id}`"
-        class="add-btn"
-        small
-        rounded
-        >
-        Ver más
-        </v-btn>
+            Ver más
+          </v-btn>
+          <div class="card-price">
+            {{ producto.price.toFixed(2) }}€
+          </div>
         </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+      </v-card>
+    </v-col>
+  </v-row>
 </section>
 
  <section class="services-section py-12">

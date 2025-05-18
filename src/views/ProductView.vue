@@ -3,7 +3,7 @@
     <h1 class="product-title">Nuestros Productos</h1>
 
     <div class="product-content">
-      <!-- Filtros -->
+      
       <aside class="filters">
         <input
           v-model="productStore.searchQuery"
@@ -140,7 +140,8 @@ const uniqueCategories = computed(() => {
 
 .product-title {
   text-align: center;
-  margin-bottom: 20px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .product-content {

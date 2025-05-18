@@ -1,67 +1,70 @@
 <template>
   <v-app class="detail">
+    
     <div class="buttons-container">
       <v-btn
-        color="red"
+        color="white"
+        class="nav-btn"
         small
-        class="bg-white elevation-2"
         @click="$router.push({ name: 'Home' })"
-      > Volver
+      >
+        ← Volver
       </v-btn>
       <v-btn
-        color="red"
+        color="white"
+        class="nav-btn"
         small
-        class="bg-white elevation-2"
         @click="$router.push({ name: 'Products' })"
       >
-     Más Productos
+        Más Productos
       </v-btn>
     </div>
 
+    
     <v-main>
-  <v-container fluid class="fill-height d-flex justify-center align-center pa-4">
-    <v-row no-gutters class="justify-center">
-      <v-col cols="12" md="8" lg="6">
-        <v-card
-          
-          class="mx-auto pa-6"
-          color="white"
-          max-width="560px"
-          height="auto"
-        >
-          <v-img :src="product?.imageUrl" height="350px" class="mb-6" contain />
+      <v-container fluid class="detail-container">
+        <v-row justify="center" align="center">
+          <v-col cols="12" sm="10" md="8" lg="6">
+            <v-card class="detail-card" elevation="4" rounded="lg">
+             
+              <v-img
+                :src="product?.imageUrl"
+                class="detail-image"
+                height="320px"
+                contain
+              />
 
-          <v-card-title class="text-h4 font-weight-bold text-center mb-4 card-title">
-            {{ product?.name }}
-          </v-card-title>
-          <v-divider />
+            
+              <v-card-title class="detail-title">
+              {{ product?.name }}
+              </v-card-title>
+              <div class="detail-brand-container">
+               <span class="detail-brand">{{ product?.brand }}</span>
+              </div>
+              <v-divider />
 
-          <v-card-text>
-            <p class="text-h6 mb-4">{{ product?.description }}</p>
-            <p class="text-subtitle-1 mb-2">
-               {{ product?.brand }}
-            </p>
-          </v-card-text>
+              
+              <v-card-text class="detail-text">
+                {{ product?.description }}
+              </v-card-text>
 
-          <v-card-actions class="justify-end">
-            <v-chip outlined small class="ma-0" size="large">
-              {{ product?.price.toFixed(2) }} €
-            </v-chip>
-          </v-card-actions>
-
-          <v-card-actions class="justify-center mt-6">
-            <v-btn color="white" class="detail-cart-btn" @click="addToCart(product!.id)">
-              Añadir al carrito
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
-</v-main>
+              
+              <v-card-actions class="detail-actions">
+                <div class="price-chip">
+                  {{ product?.price.toFixed(2) }} €
+                </div>
+                <v-spacer />
+                <v-btn class="detail-add-cart-btn" large @click="addToCart(product!.id)">
+                  Añadir al carrito
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
-
 
 
 <script lang="ts">
@@ -124,26 +127,92 @@ export default defineComponent({
 
 <style scoped>
 
+.detail {
+  background-color: #f5f5f5; 
+  min-height: 100vh;
+}
+
+
 .buttons-container {
-  position: static;
-  margin-top: 40px;
-  margin-left: 40px;
+  position: absolute;
+  top: 24px;
+  left: 24px;
   display: flex;
-  gap: 8px;
-  z-index: 1500;  
+  gap: 12px;
+  z-index: 10;
+}
+.nav-btn {
+  color: #e53935 !important;
+  background: #ffffff;
+  text-transform: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.nav-btn:hover {
+  background: #f0f0f0 !important;
 }
 
-.card-title {
 
-color: black;
+.detail-container {
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
-.detail{
-    background-color:#df8d99 ;
+
+.detail-card {
+ max-width: 500px;    
+  margin: 0 auto;    
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-.detail-cart-btn{
-    background-color: red;
+.detail-image {
+  object-fit: cover;
+}
+
+
+.detail-title {
+  font-size: 27px;
+  font-weight: 700;
+  text-align: center;
+  color: #333333;
+}
+.detail-brand-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.detail-brand {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.detail-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555555;
+  padding: 16px 24px;
+}
+
+
+.detail-actions {
+  padding: 16px 24px;
+  align-items: center;
+}
+.price-chip {
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 700;
+  color: #e53935;
+}
+.detail-add-cart-btn {
+  background-color: #e53935 !important;
+  color: white !important;
+  text-transform: none !important;
+  padding: 0 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.detail-add-cart-btn:hover {
+  background-color: #d32f2f !important;
 }
 
 </style>

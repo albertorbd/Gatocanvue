@@ -77,7 +77,7 @@ import api from '@/services/api'
 import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/userStore'
 import { useTransactionStore } from '@/stores/transaction'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 const amount = ref(0)
 const cardholderName = ref('')
@@ -95,9 +95,12 @@ let elements: StripeElements|null = null
 let card: StripeCardElement|null = null
 const brandIcon = ref<string|null>(null)
 
+const router = useRouter();
+
 const auth = useAuthStore()
 const userStore = useUserStore()
 const txStore = useTransactionStore()
+
 
 onMounted(async () => {
   stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
@@ -169,6 +172,7 @@ async function handlePayment() {
   await userStore.fetchProfile(userId)
   await txStore.fetchByUser(userId)
 
+  
   snackbar.value.text = 'Compra realizada con éxito'
   snackbar.value.show = true
   setTimeout(() => {
@@ -182,6 +186,8 @@ async function handlePayment() {
 }
 
 }
+
+
 </script>
 
 <style scoped>
