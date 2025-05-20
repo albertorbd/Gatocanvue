@@ -1,4 +1,4 @@
-// src/stores/cart.ts
+
 import { defineStore } from 'pinia';
 import api from '@/services/api';
 import type { Cart, CartAddDto, CartUpdateDto } from '@/core/cart';

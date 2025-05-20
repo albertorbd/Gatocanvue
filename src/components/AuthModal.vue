@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue'
 
-// Desestructura 'visible' para usarlo directamente y evitar la alerta de ESLint
 const { visible } = defineProps<{ visible: boolean }>()
 
 const emit = defineEmits<{
@@ -34,7 +33,7 @@ function close() {
 <style scoped>
 .modal-backdrop {
   position: fixed;
-  inset: 0;                       /* top:0; right:0; bottom:0; left:0; */
+  inset: 0;                       
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -43,9 +42,9 @@ function close() {
 }
 
 .modal-window {
-  background-color: #ff4d4d;      /* fondo rojo */
+  background-color: #ff4d4d;      
   padding: 1.5rem;
-  width: 280px;                   /* más pequeñito */
+  width: 280px;                  
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   text-align: center;

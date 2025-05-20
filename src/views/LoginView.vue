@@ -39,7 +39,7 @@ async function onSubmit() {
   error.value = null
   try {
     await auth.login(email.value, password.value)
-    router.push({ name: 'Products' })
+    router.push({ name: 'Profile' })
   } catch (err: unknown) {
     error.value = err instanceof Error ? err.message : String(err)
   }

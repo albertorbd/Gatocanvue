@@ -1,5 +1,6 @@
 <template>
-  <v-container class="profile-page py-8">
+  <div class="profile-background">
+  <v-container class="profile-page">
  
   <v-row class="profile-header" align="center" justify="space-between">
     <v-col cols="12" md="8">
@@ -27,7 +28,7 @@
           icon
           color="red"
           @click="showPhoneEdit = true"
-          class="edit-btn"
+          class="profile-edit-btn"
         >
        <i class="fa-solid fa-pencil"></i>
         </v-btn>
@@ -43,7 +44,7 @@
           icon
           color="red"
           @click="showAddressEdit = true"
-          class="edit-btn"
+          class="profile-edit-btn"
         >
           <i class="fa-solid fa-pencil"></i>
         </v-btn>
@@ -55,61 +56,83 @@
    
     <v-row class="mt-6">
       <v-col cols="12">
-        <v-card class="balance-card pa-4 d-flex align-center">
-          <div class="balance-info">
-            <div class="balance-label">Saldo disponible</div>
-            <div class="balance-amount">{{ balance.toFixed(2) }}€</div>
+        <v-card class="profile-balance-card pa-4 d-flex align-center">
+          <div class="profile-balance-info">
+            <div class="profile-balance-label">Saldo disponible</div>
+            <div class="profile-balance-amount">{{ balance.toFixed(2) }}€</div>
           </div>
           <v-spacer />
-         <v-btn color="red" dark class="add-balance" @click="goToDepositPage">+</v-btn>
+         <v-btn color="red" dark class="profile-add-balance" @click="goToDepositPage">+</v-btn>
         </v-card>
       </v-col>
     </v-row>
 
     
-    <v-row class="mt-8">
-      <v-col cols="12">
-        <h2 class="section-title">Pedidos realizados</h2>
-        <v-divider class="mb-4" />
-        <v-row dense>
-          <v-col
-            v-for="p in purchased"
-            :key="p.id"
-            cols="6"
-            sm="4"
-            md="3"
-            class="d-flex justify-center"
-          >
-            <v-card class="pa-2 purchased-card" outlined>
-              <v-img
-                :src="p.imageUrl"
-                height="100px"
-                contain
-              />
-              <v-card-text class="text-center">
-                <div class="purchased-name">{{ p.name }}</div>
-                <div class="purchased-price">{{ p.price.toFixed(2) }}€</div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="12" v-if="!purchased.length">
-            <p class="empty-text">No has comprado productos todavía.</p>
-          </v-col>
-        </v-row>
+   <v-row class="mt-8">
+  <v-col cols="12">
+    <h2 class="profile-section-title">Mis pedidos</h2>
+    <v-divider class="mb-4" />
+    
+   
+    <v-row dense class="mx-0">
+      <v-col
+        v-for="t in filteredTransactions"
+        :key="t.id"
+        cols="12"
+        sm="6"
+        md="4"
+        class="d-flex"
+      >
+        <v-card class="pa-4 profile-transaction-card" outlined>
+          <v-img
+            :src="t.product.imageUrl"
+            height="140px"
+            class="mb-3 rounded"
+            cover
+          />
+          <v-card-text class="text-center px-2">
+            <div class="profile-transaction-name text-lg font-semibold mb-1">
+              {{ t.product.name }}
+            </div>
+            <div class="profile-transaction-quantity text-gray-600 text-sm">
+              Cantidad: {{ t.quantity }}
+            </div>
+            <div class="profile-transaction-price text-gray-800 font-medium text-base">
+              Total: {{ (t.product.price * t.quantity).toFixed(2) }}€
+            </div>
+          </v-card-text>
+          <v-card-actions class="justify-center">
+            <v-btn
+              color="red"
+              variant="flat"
+              class="profile-repetir-btn"
+              @click="repeatOrder(t)"
+            >
+              Repetir pedido
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" v-if="!filteredTransactions.length">
+        <p class="profile-empty-text">No tienes transacciones todavía.</p>
       </v-col>
     </v-row>
+  </v-col>
+</v-row>
+
 
    
     <v-row class="mt-14 " justify="start">
       <v-col cols="12" class="d-flex">
-        <v-btn color="red" class="mr-2 close-session-link" @click="logout">CERRAR SESIÓN</v-btn>
-        <v-btn color="red" class="mr-2 delete-link" @click.prevent="deleteAccount">
+        <v-btn color="red" class="mr-2 profile-close-session-link" @click="logout">CERRAR SESIÓN</v-btn>
+        <v-btn color="red" class="mr-2 profile-delete-link" @click.prevent="deleteAccount">
           ELIMINAR CUENTA
         </v-btn>
         <v-btn
           v-if="authStore.user?.role === 'admin'"
           color="red"
-          class="admin-link"
+          class="profile-admin-link"
           @click="goAdmin"
         >
           ADMIN
@@ -126,18 +149,21 @@
             <v-text-field
               v-model="editName"
               label="Nombre"
+              
               required
             />
             <v-text-field
               v-model="editEmail"
               label="Email"
-              type="email"
+              :rules="emailRules"
+              :error-messages="emailErrorMessage"
               required
             />
            
             <v-text-field
               v-model="editPassword"
               label="Contraseña"
+              :rules="passwordRules"
               type="password"
             />
           </v-form>
@@ -160,6 +186,7 @@
               v-model="editPhone"
               label="Teléfono"
               required
+              :rules="phoneRules"
             />
           </v-form>
         </v-card-text>
@@ -190,9 +217,36 @@
     </v-card-text>
   </v-card>
 </v-dialog>
+
+<v-dialog v-model="showDeleteDialog" max-width="400">
+  <v-card>
+    <v-card-title class="text-h6">Eliminar cuenta </v-card-title>
+    <v-card-text>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.</v-card-text>
+    <v-card-actions>
+      <v-spacer />
+      <v-btn text color="grey" @click="showDeleteDialog = false">No</v-btn>
+      <v-btn color="red" @click="confirmDeleteAccount">Sí, eliminar</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+
+<v-snackbar
+    v-model="snackbar.visible"
+    :color="snackbar.color"
+    :timeout="snackbar.timeout"
+    top
+  >
+    {{ snackbar.message }}
     
+    <template #actions>
+      <v-btn text @click="snackbar.visible = false">
+        Cerrar
+      </v-btn>
+    </template>
+  </v-snackbar>
    
   </v-container>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -201,11 +255,16 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/userStore';
 import { useTransactionStore } from '@/stores/transaction';
+import { useCartStore } from '@/stores/cartStore';
+import axios from 'axios';
+import type { Transaction } from '@/core/transaction';
+import type { Product } from '@/core/product';
 
 const router = useRouter();
 const authStore = useAuthStore();
 const userStore = useUserStore();
 const txStore = useTransactionStore();
+const cartStore = useCartStore();
 const showEdit = ref(false);
 const showPhoneEdit = ref(false);
 const showAddressEdit = ref(false);
@@ -214,9 +273,38 @@ const editPassword = ref('');
 const editEmail = ref('');
 const editPhone = ref('');
 const editAddress = ref('');
+const emailErrorMessage = ref('');
+
+const emailRules = [
+  (v: string) => !!v || 'El correo electrónico es obligatorio.',
+  (v: string) => /.+@.+\..+/.test(v) || 'Debe ser un correo electrónico válido.'
+];
+
+const passwordRules = [
+  (v: string) => !v || v.length >= 6 || 'Mínimo 6 caracteres.',
+];
+const phoneRules = [
+  (v: string) => !!v || 'El teléfono es obligatorio.',
+  (v: string) => /^[6789]\d{8}$/.test(v) || 'Teléfono no válido.',
+];
+
+const filteredTransactions = computed< (Transaction & { product: Product })[]>(
+  () => txStore.transactions.filter(
+    (t): t is Transaction & { product: Product } => !!t.product
+  )
+);
+
+const snackbar = ref({
+  visible: false,
+  message: '',
+  color: 'success',
+  timeout: 2000,   
+});
+
 
 const balance = computed(() => userStore.profile?.balance ?? 0);
-const purchased = computed(() => txStore.purchasedProducts);
+
+const showDeleteDialog = ref(false);
 
 
 onMounted(async () => {
@@ -224,7 +312,6 @@ onMounted(async () => {
   if (!id) return;
   await userStore.fetchProfile(id);
   await txStore.fetchByUser(id);
-  await txStore.fetchPurchasedProducts(id);
   editName.value = userStore.profile?.name ?? '';
   editPassword.value = userStore.profile?.password ?? '';
   editEmail.value = userStore.profile?.email ?? '';
@@ -240,25 +327,63 @@ function goAdmin() {
   router.push({ name: 'Admin' });
 }
 
-
-
 function goToDepositPage() {
   router.push({ name: 'Deposit' }); 
 }
+
+function repeatOrder(transaction: Transaction & { product: Product }): void {
+  cartStore.addToCart({ productId: transaction.product.id, quantity: transaction.quantity })
+    .then(() => {
+      
+      snackbar.value.message = 'Pedido repetido con éxito';
+      snackbar.value.color = 'success';
+      snackbar.value.visible = true;
+    })
+    .catch(err => {
+      console.error('Error al repetir pedido:', err);
+     
+    });
+}
+
 async function submitEdit() {
-  const id = authStore.user?.id;
+  const id = userStore.profile?.id;
   if (!id) return;
-  await userStore.updateProfile(id, {
-    name: editName.value,
-    email: editEmail.value,
-    password: editPassword.value,
+
+  try {
+    await userStore.updateProfile(id, {
+      name: editName.value,
+      email: editEmail.value,
+      password: editPassword.value,
+    });
     
-    
-  });
-  showEdit.value = false;
+    emailErrorMessage.value = ''; 
+    showEdit.value = false; 
+
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response && error.response.status === 400) {
+        const message = error.response.data.message || '';
+        if (message.includes('correo electrónico ya está en uso')) {
+          emailErrorMessage.value = 'Este correo electrónico ya está en uso.';
+        } else {
+          emailErrorMessage.value = 'Error al actualizar el perfil.';
+        }
+      } else {
+        emailErrorMessage.value = 'Error al actualizar el perfil.';
+      }
+    } else {
+      emailErrorMessage.value = 'Error inesperado.';
+    }
+  }
 }
 async function deleteAccount() {
-  if (!confirm('¿Seguro que quieres eliminar tu cuenta?')) return;
+ showDeleteDialog.value = true;
+}
+
+
+async function confirmDeleteAccount() {
+  const id = authStore.user?.id;
+  if (!id) return;
   await userStore.deleteMyAccount();
   authStore.logout();
   router.push({ name: 'Register' });
@@ -280,9 +405,15 @@ async function submitAddressEdit() {
 </script>
 
 <style scoped>
+.profile-background{
+  background-color: #e7f1f5;
+}
 .profile-page {
   max-width: 900px;
   margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+ 
 }
 .profile-header {
   border-bottom: 1px solid #e0e0e0;
@@ -297,74 +428,74 @@ async function submitAddressEdit() {
   color: #666;
   margin: 0.25rem 0;
 }
-.balance-card {
+.profile-balance-card {
   display: flex;
   align-items: center;
   background: #f9f9f9;
   border-radius: 8px;
 }
-.balance-info {
+.profile-balance-info {
   display: flex;
   flex-direction: column;
 }
-.balance-label {
+.profile-balance-label {
   font-weight: 500;
   color: #555;
 }
-.balance-amount {
+.profile-balance-amount {
   font-size: 1.4rem;
   font-weight: bold;
 }
-.add-balance {
+.profile-add-balance {
   margin-left: auto;
   font-size: 20px;
 }
-.section-title {
+.profile-section-title {
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-.purchased-card {
+.profile-purchased-card {
   transition: box-shadow 0.2s;
 }
-.purchased-card:hover {
+.profile-purchased-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-.purchased-name {
+.profile-purchased-name {
   font-size: 0.95rem;
   font-weight: 500;
 }
-.purchased-price {
+.profile-purchased-price {
   font-size: 0.85rem;
   color: #777;
 }
-.empty-text {
+.profile-empty-text {
   text-align: center;
   color: #777;
   font-style: italic;
 }
-.delete-link {
+.profile-delete-link {
   color: #e53e3e;
   text-transform: none;
 }
-.delete-link:hover {
+.profile-delete-link:hover {
   text-decoration: underline;
 }
 
-.admin-link{
+.profile-admin-link{
    color: #e53e3e;
   text-transform: none;
 }
 
-.admin-link:hover {
+.profile-admin-link:hover {
   text-decoration: underline;
 }
 
-.close-session-link{
+.profile-close-session-link{
     color: #e53e3e;
   text-transform: none;
 }
-.close-session-link:hover {
+.profile-close-session-link:hover {
   text-decoration: underline;
 }
 
@@ -385,8 +516,51 @@ async function submitAddressEdit() {
   font-size: 20px;
 }
 
-.edit-btn {
+.profile-edit-btn {
   margin-left: 5px;
   font-size: 10px;
 }
+.profile-transaction-card {
+  margin: 12px;      
+  transition: box-shadow 0.2s ease;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.profile-transaction-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.v-btn--flat {
+  box-shadow: none !important;
+}
+.profile-transaction-name { 
+  font-size: 1.1rem;
+   font-weight: 500; 
+}
+.profile-transaction-quantity,
+.profile-transaction-price {
+   font-size: 0.85rem;
+   color: #777;
+    }
+
+.profile-repetir-btn{
+  background-color: #d32f2f; 
+  color: #ffffff; 
+  border-radius: 8px; 
+  font-weight: 500;
+  font-size: 14px; 
+  padding: 10px 20px; 
+  transition: all 0.3s ease; 
+}
+.profile-repetir-btn:hover{
+  background-color: #020000; 
+  transform: translateY(-2px); 
+}
+
+.repetir-pedido-btn::before {
+  display: none;
+}
+
 </style>

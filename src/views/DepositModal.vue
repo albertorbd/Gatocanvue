@@ -1,4 +1,5 @@
 <template>
+  <div class="deposit-view">
   <div class="deposit-container">
     <h2 class="deposit-title">Añadir saldo</h2>
 
@@ -37,7 +38,7 @@
 
     
     <div id="card-element" class="deposit-stripe-element"></div>
-    <div class="card-brand">
+    <div class="deposit-card-brand">
     </div>
 
    
@@ -61,6 +62,7 @@
         <v-btn text @click="snackbar.show = false">Cerrar</v-btn>
       </template>
     </v-snackbar>
+  </div>
   </div>
   
 </template>
@@ -191,70 +193,5 @@ async function handlePayment() {
 </script>
 
 <style scoped>
-.deposit-container {
-  max-width: 480px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-.deposit-title {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.deposit-row {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-.deposit-input {
-  flex: 1;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-.deposit-input--half { max-width: 48%; }
-.deposit-stripe-element {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-}
-.card-brand {
-  text-align: right;
-  margin-bottom: 1rem;
-}
-.card-brand img {
-  height: 24px;
-}
-.deposit-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 0.75rem;
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  position: relative;
-}
-.lock-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 0.5rem;
-  fill: #fff;
-}
-.deposit-button:disabled {
-  background: #666;
-  cursor: not-allowed;
-}
-.deposit-error {
-  color: #e53935;
-  text-align: center;
-  margin-top: 1rem;
-}
+
 </style>

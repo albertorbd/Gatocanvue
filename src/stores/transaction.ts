@@ -1,5 +1,3 @@
-
-
 import { defineStore } from 'pinia';
 import api from '@/services/api';
 import type { PurchaseDto, Transaction} from '@/core/transaction';

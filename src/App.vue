@@ -4,11 +4,13 @@
     <main class="main-content">
       <RouterView />
     </main>
+    <FooterComp />
   </div>
 </template>
 
 <script setup lang="ts">
 import HeaderComp from './components/HeaderComp.vue';
+import FooterComp from './components/FooterComp.vue';
 </script>
 
 <style scoped>

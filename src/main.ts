@@ -22,11 +22,11 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';   
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'; 
 
-import { faSignInAlt, faUserPlus, faUser } from '@fortawesome/free-solid-svg-icons';  
+import { faSignInAlt, faUserPlus, faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';  
 import { useAuthStore } from './stores/auth'
 
 
-library.add(faSignInAlt, faUserPlus, faUser,faPencilAlt);
+library.add(faSignInAlt, faUserPlus, faUser,faPencilAlt,faShoppingCart );
 dom.watch();
 
 

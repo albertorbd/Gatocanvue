@@ -1,20 +1,20 @@
 <template>
-  <!-- 1. Contenido principal solo si hay items -->
-  <v-container class="checkout-page py-8" v-if="cart && cart.items.length">
+  
+  <v-container class="checkout-page" v-if="cart && cart.items.length">
     <v-row no-gutters>
       <v-col cols="12" md="7">
-        <v-card class="cart-card" elevation="4" rounded="lg">
-          <v-card-title class="cart-card__title">Tu carrito</v-card-title>
+        <v-card class="checkout-cart-card" elevation="4" rounded="lg">
+          <v-card-title class="checkout-cart-card__title">Tu carrito</v-card-title>
           <v-divider />
-          <v-list two-line class="product-list px-4 py-2">
+          <v-list two-line class="checkout-product-list px-4 py-2">
             <v-list-item
               v-for="item in cart.items"
               :key="item.productId"
-              class="product-list__item"
+              class="checkout-product-list__item"
             >
               <v-img
                 :src="item.product.imageUrl"
-                class="product-image"
+                class="checkout-product-image"
               />
               <v-list-item-content>
                 <v-list-item-title class="font-weight-medium">
@@ -27,9 +27,9 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
-          <v-card-text class="cart-card__total">
+          <v-card-text class="checkout-cart-card__total">
             <span>Total:</span>
-            <span class="cart-card__amount">{{ total.toFixed(2) }}€</span>
+            <span class="checkout-cart-card__amount">{{ total.toFixed(2) }}€</span>
           </v-card-text>
         </v-card>
       </v-col>
@@ -118,6 +118,10 @@
       <v-btn text @click="snackbar.show = false">Cerrar</v-btn>
     </template>
   </v-snackbar>
+
+  <div v-if="alertMsg.show" class="checkout-custom-alert">
+    {{ alertMsg.message }}
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -134,6 +138,12 @@ const txStore = useTransactionStore();
 const userStore = useUserStore();
 const authStore = useAuthStore();
 const router = useRouter();
+const alertMsg = ref({
+  show: false,
+  message: '',
+  color: 'error',
+});
+
 
 const paymentMethod = ref<'balance'|'card'>('balance');
 const processing = ref(false);
@@ -166,7 +176,15 @@ onMounted(async () => {
 async function confirmCheckout() {
   const userId = authStore.user?.id;
   if (!userId) return alert('Debes iniciar sesión.');
-  if (!userStore.profile?.address?.trim()) return alert('Por favor, rellena la dirección de envío antes de continuar.');
+
+  if (!userStore.profile?.address?.trim()) {
+    showAlert('Por favor, añade una dirección de envío antes de continuar.');
+    return;
+  }
+  if (paymentMethod.value === 'balance' && balance.value < total.value) {
+    showAlert('Saldo insuficiente para completar la compra.');
+    return;
+  }
 
   processing.value = true;
   try {
@@ -176,7 +194,7 @@ async function confirmCheckout() {
 
     completePurchase();
   } catch {
-    alert('Error al procesar con balance.');
+    showAlert('Error al procesar la compra.');
   } finally {
     processing.value = false;
   }
@@ -185,7 +203,10 @@ async function confirmCheckout() {
 async function onCardSuccess() {
   const userId = authStore.user?.id;
   if (!userId) return alert('Usuario no autenticado.');
-  if (!userStore.profile?.address?.trim()) return alert('Por favor, rellena la dirección de envío antes de continuar.');
+  if (!userStore.profile?.address?.trim()) {
+   showAlert('Por favor, añade una dirección de envío antes de continuar.');
+    return;
+  }
 
   processing.value = true;
   try {
@@ -194,11 +215,12 @@ async function onCardSuccess() {
     }
     completePurchase();
   } catch {
-    alert('Error registrando la compra.');
+    showAlert('Error registrando la compra');
   } finally {
     processing.value = false;
   }
 }
+
 
 function onCardError(msg: string) {
   processing.value = false;
@@ -212,9 +234,9 @@ async function saveProfile() {
   try {
     await userStore.updateProfile(userId, { address: editedAddress.value, phone: editedPhone.value });
     isEditing.value = false;
-    showSuccess('Dirección actualizada');
+    showSuccess('Datos actualizados!');
   } catch {
-    alert('Error actualizando perfil.');
+    showAlert('Error actualizando perfil.')
   }
 }
 function cancelEdit() {
@@ -235,36 +257,48 @@ function completePurchase() {
     router.push({ name: 'Profile' });
   }, 2000);
 }
+
+function showAlert(message: string) {
+  alertMsg.value.message = message;
+  alertMsg.value.show = true;
+  setTimeout(() => {
+    alertMsg.value.show = false;
+  }, 2000); 
+}
 </script>
 
 <style scoped>
 .checkout-page { 
   max-width: 960px;
    margin: 0 auto;
+   padding-bottom: 120px !important;
+   padding-top: 120px!important;
   }
-.cart-card { 
+.checkout-cart-card { 
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 24px; }
-.cart-card__title {
+.checkout-cart-card__title {
    font-size: 1.5rem;
    font-weight: 600; 
    padding: 16px 24px;
     color: #333; 
   }
-.product-list__item {
+.checkout-product-list__item {
    display: flex; 
    align-items: center; 
    padding: 12px 0; 
   }
-.product-image { width: 72px;
+.checkout-product-image { width: 72px;
    height: 72px; 
    border-radius: 4px;
     margin-right: 16px; 
     object-fit: contain; 
   }
-.cart-card__total { 
+
+ 
+.checkout-cart-card__total { 
   display: flex;
    justify-content: 
    flex-end; align-items:
@@ -272,8 +306,8 @@ function completePurchase() {
    padding: 16px 24px; 
    border-top: 1px solid #f0f0f0;
    }
-.cart-card__amount { 
-  font-size: 1.25rem;
+.checkout-cart-card__amount { 
+  font-size: 17px;
    font-weight: 700;
     color: #e53935;
    }
@@ -286,6 +320,17 @@ function completePurchase() {
    font-style: italic;
     color: #555; 
   }
+.checkout-custom-alert {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 1000;
+}
 .pl-md-6 {
    padding-left: 1.5rem; 
   }

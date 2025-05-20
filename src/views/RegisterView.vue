@@ -1,4 +1,4 @@
-<!-- src/views/RegisterView.vue -->
+
 <template>
   <div class="register-page">
     <div class="register-card">
@@ -57,6 +57,4 @@ async function onSubmit() {
 </script>
 
 <style scoped>
-
-
 </style>

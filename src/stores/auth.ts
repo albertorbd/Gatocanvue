@@ -64,7 +64,7 @@ export const useAuthStore = defineStore('auth', {
         email,
         password,
       });
-      // Guarda token y user
+      
       this.token = data.token;
       localStorage.setItem('jwt_token', data.token);
       api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;

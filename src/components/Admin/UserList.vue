@@ -1,5 +1,5 @@
 <template>
-    <div class="user-list">
+    <div class="admin-user-list">
       <h2>Gestión de Usuarios</h2>
       <table>
         <thead>
@@ -32,10 +32,5 @@
   </script>
   
   <style scoped>
-  .user-list { margin-bottom: 2rem; }
-  .user-list h2 { margin-bottom: 1rem; }
-  .user-list table { width: 100%; border-collapse: collapse; }
-  .user-list th, .user-list td { padding: 0.5rem; border: 1px solid #ddd; }
-  .user-list th { background: #f5f5f5; }
   </style>
   
