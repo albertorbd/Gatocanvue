@@ -33,7 +33,7 @@ let elements: StripeElements|null = null
 let card: StripeCardElement|null = null
 
 
-const formattedAmount = `$${props.amount.toFixed(2)}`
+const formattedAmount = `${props.amount.toFixed(2)}€`
 
 onMounted(async () => {
   stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
@@ -53,35 +53,36 @@ onMounted(async () => {
 })
 
 async function pay() {
-  if (!stripe || !card) return
-  loading.value = true
-  error.value = null
+  if (!stripe || !card) return;
+  loading.value = true;
+  error.value = null;
 
   try {
-    
     const { data } = await api.post('/payments/create-intent', {
-      amount: Math.round(props.amount * 100)
-    })
-    const clientSecret = data.clientSecret
+      amount: Math.round(props.amount * 100),
+    });
+    const clientSecret = data.clientSecret;
 
-    
     const { error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: { card }
-    })
+      payment_method: { card },
+    });
+
     if (stripeError) {
-      error.value = stripeError.message || 'Error al procesar la tarjeta'
-      emit('error', error.value)
+      error.value = stripeError.message || 'Error al procesar la tarjeta';
+      emit('error', error.value);
+      loading.value = false; 
     } else {
-      emit('success')
+      emit('success');
     }
   } catch (e: unknown) {
-  let msg = 'Error en el servidor'
-  if (e instanceof Error) {
-    msg = e.message
+    let msg = 'Error en el servidor';
+    if (e instanceof Error) {
+      msg = e.message;
+    }
+    error.value = msg;
+    emit('error', msg);
+    loading.value = false; 
   }
-  error.value = msg
-  emit('error', msg)
-}
 }
 </script>
 

@@ -81,22 +81,25 @@
             </v-chip>
           </v-chip-group>
         </v-card>
-        <div v-if="paymentMethod==='card'" class="mb-4">
-          <StripeCheckout
-            :amount="total"
-            @success="onCardSuccess"
-            @error="onCardError"
-          />
-        </div>
-        <v-btn
-          :loading="processing"
-          block
-          color="error"
-          large
-          @click="confirmCheckout"
-        >
-          Confirmar pedido
-        </v-btn>
+       <div v-if="paymentMethod === 'card'" class="mb-4">
+  <template v-if="userStore.profile?.address?.trim()">
+    <StripeCheckout
+      :amount="total"
+      @success="onCardSuccess"
+      @error="onCardError"
+    />
+  </template>
+  <v-alert v-else type="warning" border="start" colored-border color="orange" elevation="2">
+    Rellena tu dirección de envío para activar el pago con tarjeta.
+    </v-alert>
+  </div>
+      <v-btn
+      v-if="paymentMethod === 'balance'"
+      :loading="processing"
+      block
+      color="error"
+      large
+      @click="confirmCheckout">Confirmar pedido</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -178,7 +181,7 @@ async function confirmCheckout() {
   if (!userId) return alert('Debes iniciar sesión.');
 
   if (!userStore.profile?.address?.trim()) {
-    showAlert('Por favor, añade una dirección de envío antes de continuar.');
+    showAlert('Por favor, añade los datos de envio antes de continuar.');
     return;
   }
   if (paymentMethod.value === 'balance' && balance.value < total.value) {
@@ -204,7 +207,7 @@ async function onCardSuccess() {
   const userId = authStore.user?.id;
   if (!userId) return alert('Usuario no autenticado.');
   if (!userStore.profile?.address?.trim()) {
-   showAlert('Por favor, añade una dirección de envío antes de continuar.');
+   showAlert('Por favor, añade los datos de envio antes de continuar.');
     return;
   }
 

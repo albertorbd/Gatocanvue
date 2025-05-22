@@ -917,6 +917,40 @@ border-radius: 8px;
 
 /*Inicio deposit*/
 
+.deposit-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.deposit-input-error {
+  border-color: #e53935 !important;
+}
+
+.deposit-error-text {
+  color: #e53935;
+  font-size: 13px;
+  margin: 4px 0 0;
+  min-height: 1em;
+}
+
+.deposit-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.deposit-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+
 .deposit-view{
   padding-top: 120px;
   padding-bottom: 120px;
@@ -934,17 +968,8 @@ border-radius: 8px;
   text-align: center;
   margin-bottom: 1.5rem;
 }
-.deposit-row {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-.deposit-input {
-  flex: 1;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
+
+
 .deposit-input--half { max-width: 48%; }
 .deposit-stripe-element {
   padding: 0.75rem;
@@ -996,11 +1021,15 @@ border-radius: 8px;
 /*Fin perfil*/
 
 /*Inicio Carrito*/
+.cart-background{
+  background-color: #f5f5f5;
+  
+}
 .cart-view {
   max-width: 800px;
-  margin: 2rem auto;
   padding-top: 120px;
   padding-bottom: 120px;
+ margin-left: 450px;
 }
 .cart-title {
   font-size: 1.8rem;

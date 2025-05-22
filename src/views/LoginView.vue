@@ -28,6 +28,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import axios from 'axios'
 
 const email = ref('')
 const password = ref('')
@@ -41,8 +42,21 @@ async function onSubmit() {
     await auth.login(email.value, password.value)
     router.push({ name: 'Profile' })
   } catch (err: unknown) {
-    error.value = err instanceof Error ? err.message : String(err)
+  if (axios.isAxiosError(err) && err.response) {
+    const status = err.response.status
+    const message = err.response.data
+
+    if (status === 404 || status === 401) {
+      error.value = message
+    } else {
+      error.value = 'Ocurrió un error inesperado: ' + message
+    }
+  } else if (err instanceof Error) {
+    error.value = err.message
+  } else {
+    error.value = 'Error desconocido'
   }
+}
 }
 </script>
 

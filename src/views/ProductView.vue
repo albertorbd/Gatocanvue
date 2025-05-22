@@ -19,6 +19,7 @@
         v-model:priceOrder="productStore.priceOrder"
         :brands="uniqueBrands"
         :categories="uniqueCategories"
+        @reset="resetAllFilters"
       />
 
      
@@ -58,6 +59,7 @@ function clearFeedback(afterMs = 3000) {
 }
 
 
+
 async function addToCart(productId: number) {
   if (!authStore.user) {
     feedbackType.value    = 'error'
@@ -82,6 +84,14 @@ async function addToCart(productId: number) {
 
 function goToProduct(id: number) {
   router.push({ name: 'ProductDetail', params: { id } })
+}
+
+function resetAllFilters() {
+  productStore.searchQuery = ''
+  productStore.selectedBrand = ''
+  productStore.selectedCategory = ''
+  productStore.priceOrder = ''
+  productStore.fetchAllProducts()
 }
 
 

@@ -1,4 +1,5 @@
 <template>
+  <div class="cart-background">
   <div class="cart-view">
     <h1 class="cart-title">Mi Carrito</h1>
 
@@ -20,6 +21,7 @@
         @checkout="proceedToCheckout"
       />
     </div>
+  </div>
   </div>
 </template>
 

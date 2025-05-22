@@ -88,7 +88,7 @@
             :src="t.product.imageUrl"
             height="140px"
             class="mb-3 rounded"
-            cover
+            contain
           />
           <v-card-text class="text-center px-2">
             <div class="profile-transaction-name text-lg font-semibold mb-1">
@@ -406,7 +406,7 @@ async function submitAddressEdit() {
 
 <style scoped>
 .profile-background{
-  background-color: #e7f1f5;
+  background-color: #f5f5f5;
 }
 .profile-page {
   max-width: 900px;
