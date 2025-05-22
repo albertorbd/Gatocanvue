@@ -10,8 +10,8 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+
   
-  /*
    server: {
     proxy: {
       '/images': {
@@ -21,7 +21,7 @@ export default defineConfig({
       },
     },
   },
-  */
+  
  
   resolve: {
     alias: {

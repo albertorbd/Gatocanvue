@@ -29,17 +29,17 @@ const testimonios = [
   {
     nombre: "Pedro G.",
     comentario: "Excelente atención y productos de calidad, ¡mi perro está encantado!",
-    foto: "/src/assets/pedro.jpg",
+    foto: "/images/pedro.jpg",
   },
   {
     nombre: "Carlos M.",
     comentario: "El servicio de peluquería fue increíble. ¡Repetiremos seguro!",
-    foto: "/src/assets/carlos.jpg",
+    foto: "/images/carlos.jpg",
   },
   {
     nombre: "María P.",
     comentario: "Muy profesionales y atentos. Lo recomiendo 100%.",
-    foto: "/src/assets/maria.jpg",
+    foto: "/images/maria.jpg",
   },
 ]
 </script>

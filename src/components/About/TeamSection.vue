@@ -21,25 +21,25 @@ import TeamMemberCard from '@/components/About/TeamCard.vue';
 
 const members = [
   {
-    img: '/src/assets/veterinaria.jpg',
+    img: '/images/veterinaria.jpg',
     alt: 'Dra. Martínez',
     name: 'Erica Martínez',
     role: 'Veterinaria',
   },
   {
-    img: '/src/assets/adiestrador.jpg',
+    img: '/images/adiestrador.jpg',
     alt: 'Alberto Gómez',
     name: 'Alberto Gómez',
     role: 'Adiestrador',
   },
   {
-    img: '/src/assets/cuidadora.jpg',
+    img: '/images/cuidadora.jpg',
     alt: 'Ana Román',
     name: 'Ana Román',
     role: 'Cuidador',
   },
   {
-    img: '/src/assets/cuidador.jpg',
+    img: '/images/cuidador.jpg',
     alt: 'Miguel Sánchez',
     name: 'Santiago del Pino',
     role: 'Cuidador',

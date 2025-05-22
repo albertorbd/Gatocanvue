@@ -4,7 +4,7 @@
       <v-row align="stretch">
         <v-col cols="12" md="6" class="d-flex align-center">
           <v-img
-            src="/src/assets/about-us-historia.jpg"
+            src="/images/about-us-historia.jpg"
             alt="Nuestra historia"
             class="about-us__image"
           />

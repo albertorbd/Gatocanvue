@@ -44,17 +44,17 @@
 <script setup lang="ts">
 const primaryServices = [
   {
-    img: '/src/assets/adiestramiento.jpg',
+    img: '/images/adiestramiento.jpg',
     title: 'Adiestramiento de perros',
     subtitle: 'Clases personalizadas para tu mascota',
   },
   {
-    img: '/src/assets/veterinario.jpg',
+    img: '/images/veterinario.jpg',
     title: 'Veterinario',
     subtitle: 'Revisión y atención sanitaria',
   },
   {
-    img: '/src/assets/alojamiento.jpg',
+    img: '/images/alojamiento.jpg',
     title: 'Alojamiento para animales',
     subtitle: 'Cuidados y confort 24/7',
   },
@@ -62,12 +62,12 @@ const primaryServices = [
 
 const secondaryServices = [
   {
-    img: '/src/assets/paseo.jpg',
+    img: '/images/paseo.jpg',
     title: 'Paseos caninos',
     subtitle: 'Rutas diarias y diversión',
   },
   {
-    img: '/src/assets/peluqueria.jpg',
+    img: '/images/peluqueria.jpg',
     title: 'Peluquería',
     subtitle: 'Tu perro tendrá el mejor flow',
   },
