@@ -10,7 +10,9 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
- /* server: {
+  
+  /*
+   server: {
     proxy: {
       '/images': {
         target: 'http://localhost:7018',
@@ -20,15 +22,7 @@ export default defineConfig({
     },
   },
   */
- server: {
-    proxy: {
-      '/images': {
-        target: 'https://gatocandealberto-cyfdc3b7dtf4hphg.westeurope-01.azurewebsites.net',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+ 
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
