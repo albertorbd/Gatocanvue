@@ -12,16 +12,17 @@
         md="4"
         class="pa-4"
       >
-        
-        <v-card elevation="2" outlined rounded="lg" class="home-service-card pa-6 text-center">
-          <v-img :src="s.img" height="300" cover class="mb-4" />
-          <div class="text-h6 font-weight-medium mb-2">{{ s.title }}</div>
-          <div class="subtitle-2 text--secondary">{{ s.subtitle }}</div>
-        </v-card>
+        <router-link :to="s.link" class="text-decoration-none">
+          <v-card elevation="2" outlined rounded="lg" class="home-service-card pa-6 text-center">
+            <v-img :src="s.img" height="300" cover class="mb-4" />
+            <div class="text-h6 font-weight-medium mb-2">{{ s.title }}</div>
+            <div class="subtitle-2 text--secondary">{{ s.subtitle }}</div>
+          </v-card>
+        </router-link>
       </v-col>
     </v-row>
 
-    
+   
     <v-row class="px-6 mt-6" justify="center" align="stretch" dense :gutter="24">
       <v-col
         v-for="(s, i) in secondaryServices"
@@ -31,11 +32,13 @@
         md="4"
         class="pa-4"
       >
-        <v-card elevation="2" outlined rounded="lg" class="home-service-card pa-6 text-center">
-          <v-img :src="s.img" height="300" cover class="mb-4" />
-          <div class="text-h6 font-weight-medium mb-2">{{ s.title }}</div>
-          <div class="subtitle-2 text--secondary">{{ s.subtitle }}</div>
-        </v-card>
+        <router-link :to="s.link" class="text-decoration-none">
+          <v-card elevation="2" outlined rounded="lg" class="home-service-card pa-6 text-center">
+            <v-img :src="s.img" height="300" cover class="mb-4" />
+            <div class="text-h6 font-weight-medium mb-2">{{ s.title }}</div>
+            <div class="subtitle-2 text--secondary">{{ s.subtitle }}</div>
+          </v-card>
+        </router-link>
       </v-col>
     </v-row>
   </section>
@@ -47,16 +50,19 @@ const primaryServices = [
     img: '/images/adiestramiento.jpg',
     title: 'Adiestramiento de perros',
     subtitle: 'Clases personalizadas para tu mascota',
+    link: '/adiestramiento',
   },
   {
     img: '/images/veterinario.jpg',
     title: 'Veterinario',
     subtitle: 'Revisión y atención sanitaria',
+    link: '/veterinario',
   },
   {
     img: '/images/alojamiento.jpg',
     title: 'Alojamiento para animales',
     subtitle: 'Cuidados y confort 24/7',
+    link: '/alojamiento',
   },
 ]
 
@@ -65,11 +71,13 @@ const secondaryServices = [
     img: '/images/paseo.jpg',
     title: 'Paseos caninos',
     subtitle: 'Rutas diarias y diversión',
+    link: '/paseos',
   },
   {
     img: '/images/peluqueria.jpg',
     title: 'Peluquería',
     subtitle: 'Tu perro tendrá el mejor flow',
+    link: '/peluqueria',
   },
 ]
 </script>

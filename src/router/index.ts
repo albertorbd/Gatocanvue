@@ -12,6 +12,11 @@ import RegisterView from '@/views/RegisterView.vue'
 import CartView from '@/views/CartView.vue'
 import ProductDetail from '@/views/ProductDetail.vue'
 import CheckoutView from '@/views/CheckoutView.vue'
+import AdiestramientoView from '@/views/AdiestramientoView.vue'
+import VeterinarioView from '@/views/VeterinarioView.vue'
+import PeluqueriaView from '@/views/PeluqueriaView.vue'
+import AlojamientoView from '@/views/AlojamientoView.vue'
+import PaseosView from '@/views/PaseosView.vue'
 
 
 
@@ -23,6 +28,11 @@ const routes = [
   { path: '/products', name: 'Products', component: Products },
   { path: '/about-us', name: 'AboutUs', component: AboutUs },
   { path: '/contact', name: 'Contact', component: ContactView },
+  { path: '/adiestramiento', name: 'AdiestramientoView', component: AdiestramientoView},
+  {path: '/veterinario', name: 'VeterinarioView', component: VeterinarioView},
+  {path: '/peluqueria', name: 'PeluqueriaView', component: PeluqueriaView},
+  {path: '/alojamiento', name: 'AlojamientoView', component: AlojamientoView},
+  {path: '/paseos', name: 'PaseosView', component: PaseosView},
 
   {
   path: '/deposit',
