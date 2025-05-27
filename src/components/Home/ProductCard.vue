@@ -7,7 +7,7 @@
       </v-card-text>
       <v-card-actions class="home-card-actions">
         <v-btn :to="`/products/${producto.id}`" class="home-btn-view" small rounded>
-          Ver más
+          VER MÁS
         </v-btn>
         <div class="home-card-price">{{ producto.price.toFixed(2) }}€</div>
       </v-card-actions>
@@ -25,3 +25,16 @@ defineProps<{
   }
 }>()
 </script>
+
+<style>
+
+.home-btn-view {
+  text-transform: none;
+  font-size: 15px !important;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  background: rgb(255, 255, 255) !important;
+  color: #e90202 !important;
+  transition: background 0.2s, color 0.2s;
+}
+</style>

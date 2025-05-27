@@ -1,6 +1,6 @@
 <template>
   <section class="about-us-team-section py-12">
-    <h2 class="text-h3 font-weight-bold text-center mb-8">Nuestro equipo</h2>
+    <h2 class="text-center mb-8">Nuestro equipo</h2>
     <v-container>
       <v-row justify="center" align="stretch" dense :gutter="24">
         <TeamMemberCard

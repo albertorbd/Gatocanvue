@@ -16,8 +16,6 @@ import FooterComp from './components/FooterComp.vue';
 <style scoped>
 /* Estilos generales */
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
   margin: 0;
   padding: 0;
 }

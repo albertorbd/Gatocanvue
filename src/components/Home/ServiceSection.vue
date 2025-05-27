@@ -1,6 +1,6 @@
 <template>
   <section class="home-services-section py-12">
-    <h2 class="text-h4 font-weight-bold text-center mb-8">Nuestros servicios</h2>
+    <h2 class="text-center mb-8">Nuestros servicios</h2>
 
    
     <v-row class="px-6" align="stretch" dense>
@@ -15,8 +15,8 @@
         <router-link :to="s.link" class="text-decoration-none">
           <v-card elevation="2" outlined rounded="lg" class="home-service-card pa-6 text-center">
             <v-img :src="s.img" height="300" cover class="mb-4" />
-            <div class="text-h6 font-weight-medium mb-2">{{ s.title }}</div>
-            <div class="subtitle-2 text--secondary">{{ s.subtitle }}</div>
+            <h5 class=" mb-2">{{ s.title }}</h5>
+            <p class="">{{ s.subtitle }}</p>
           </v-card>
         </router-link>
       </v-col>
@@ -35,8 +35,8 @@
         <router-link :to="s.link" class="text-decoration-none">
           <v-card elevation="2" outlined rounded="lg" class="home-service-card pa-6 text-center">
             <v-img :src="s.img" height="300" cover class="mb-4" />
-            <div class="text-h6 font-weight-medium mb-2">{{ s.title }}</div>
-            <div class="subtitle-2 text--secondary">{{ s.subtitle }}</div>
+            <h5 class="mb-2">{{ s.title }}</h5>
+            <p class="">{{ s.subtitle }}</p>
           </v-card>
         </router-link>
       </v-col>

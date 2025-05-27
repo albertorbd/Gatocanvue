@@ -1,6 +1,6 @@
 <template>
     <div class="admin-product-crud">
-      <h2>Gestión de Productos</h2>
+      <h4 class="admin-product-gestion">Gestión de Productos</h4>
 
       <form @submit.prevent="submitForm" class="admin-product-form">
         <input v-model="form.name" placeholder="Nombre" required />
@@ -24,8 +24,8 @@
       <ul class="admin-product-list">
         <li v-for="p in products" :key="p.id" class="admin-product-item">
           <div class="admin-product-info">
-            <strong>{{ p.name }}</strong><br />
-            {{ p.price.toFixed(2) }}€
+            <strong>{{ p.name }}</strong><br/>
+            <p class="admin-product-price">{{ p.price.toFixed(2) }}€</p>
           </div>
           <div class="admin-product-actions">
             <button class="btn admin-edit-btn" @click="editProduct(p)">Editar</button>

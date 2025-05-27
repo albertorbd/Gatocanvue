@@ -2,7 +2,38 @@ html, body {
     margin: 0;
     padding: 0;
   }
-p{
+p,a{
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 400;
+   font-size: 18px;
+}
+button{
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Poppins', sans-serif;
+  
+}
+h1{
+  font-size: 46px;
+}
+h2{
+  font-size: 38px;
+}
+h3{
+  font-size: 36px;
+
+}
+h4{
+  font-size: 30px;
+}
+
+h5{
+  font-size: 24px;
+}
+
+h6{
   font-size: 20px;
 }
 
@@ -32,7 +63,7 @@ p{
     flex: 1;
   }
   .header__logo-link {
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
     font-weight: bold;
     color: #35495e;
     text-decoration: none;
@@ -47,7 +78,8 @@ p{
   .header__link {
     color: #35495e;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 18px !important;
     padding: 0.5rem 0.5rem;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
@@ -63,6 +95,11 @@ p{
     flex: 1;
     justify-content: flex-end;
     gap: 1rem;
+  }
+
+  .header-icon-label{
+     font-family: 'Open Sans', sans-serif;
+     font-size: 12px !important;
   }
   .header__icon-btn {
     background: none;
@@ -100,25 +137,16 @@ p{
   .home-hero__title {
     margin: 0;
     color: #fff;
-    font-size: 3rem;   
     line-height: 1.2;
   }
   
   .home-hero__subtitle {
     margin-top: 1rem;
     color: #eee;
-    font-size: 1.25rem;
+    font-size: 20px;
   }
 
-  .home-hero_btn {
-    margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 999px;          
-    text-transform: none;         
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
+
 
 .home-products {
   padding: 60px 0 80px;
@@ -146,16 +174,7 @@ p{
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
-.home-add-btn {
-  background-color: white !important;
-  color: red !important;
-  text-transform: none;
-}
 
- .home-add-btn:hover {
-  background-color: black !important;
-  color: white !important;
-}
 
 .home-card-content {
   flex-grow: 1;
@@ -177,6 +196,7 @@ p{
 
 .home-btn-view {
   text-transform: none;
+  font-size: 16px !important;
   font-weight: 500;
   border: 1px solid #e53935;
   background: rgb(255, 255, 255) !important;
@@ -199,13 +219,13 @@ p{
 
 .home-card-title{
   font-size: 18px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
   
 }
 
 .home-product-title {
   text-align: center;
-  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -280,16 +300,11 @@ p{
 }
 
 .about-us__title {
-  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
 
-.about-us__text {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
+
 
 .about-us__image {
   border-radius: 8px;
@@ -298,17 +313,11 @@ p{
 
 .about-us {
   padding: 4rem 0;
-  background-color: #f9f9f9;
+  background-color: #f5f5f5;
 }
 
-.about-us__title {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-}
 
 .about-us__text {
-  font-size: 18px;
   line-height: 1.6;
   margin-bottom: 1rem;
 }
@@ -404,8 +413,13 @@ border-radius: 8px;
 }
 
 .contact-form-section {
-  background-color: #fafafa;
+  background-color: #f5f5f5;
   border-top: 1px solid #e0e0e0;
+}
+
+.contact-btn-submit{
+  background-color: #ff4d4d !important;
+  color: #fff !important;
 }
 
 /*Fin Contact*/
@@ -550,12 +564,12 @@ border-radius: 8px;
 }
 
 .product-btn-add-cart {
-  background-color: #d82108;
+  background-color: #e90202;
   color: white;
 }
 
 .product-btn-add-cart:hover {
-  background-color: #b71c1c;
+  background-color: #d64747;
 }
 
 .product-btn-view-more {
@@ -604,7 +618,9 @@ border-radius: 8px;
   flex-direction: column;
   gap: 1rem;
 }
-
+.register-link{
+font-size: 16px;
+}
 .register-label {
   display: flex;
   flex-direction: column;
@@ -751,7 +767,7 @@ border-radius: 8px;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  background-color: #f5f5f5;
   padding: 1rem;
 }
 
@@ -789,8 +805,8 @@ border-radius: 8px;
 
 .welcome-button {
   padding: 0.75rem 1.5rem;
-  background-color: #e53935;
-  color: #fff !important;
+  background-color: #e90202;
+    color: white;
   border: none;
   border-radius: 6px;
   font-size: 1rem;
@@ -821,9 +837,16 @@ border-radius: 8px;
   }
   .admin h1 {
     text-align: center;
+    font-size: 38px;
     margin-bottom: 2rem;
-    font-size: 2rem;
     color: #35495e;
+  }
+
+.admin-user-gestion{
+    padding-bottom: 20px;
+  }
+.admin-product-gestion{
+    padding-bottom: 20px;
   }
 .admin-user-list {
     margin-bottom: 2rem; 
@@ -849,6 +872,9 @@ border-radius: 8px;
   }
   .admin-product-crud h2 {
     margin-bottom: 1rem;
+  }
+  .admin-product-price{
+    font-size: 16px;
   }
   .admin-product-form {
     display: flex;
@@ -1015,11 +1041,6 @@ border-radius: 8px;
 }
 /*Fin deposit*/
 
-/*Inicio Perfil*/
-
-
-/*Fin perfil*/
-
 /*Inicio Carrito*/
 .cart-background{
   background-color: #f5f5f5;
@@ -1032,13 +1053,14 @@ border-radius: 8px;
  margin-left: 530px;
 }
 .cart-title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  font-size: 36px;
+  margin-bottom: 60px;
   text-align: center;
 }
 .cart-loading,
 .empty-cart {
   text-align: center;
+  font-size: 18px;
   color: #666;
   font-style: italic;
 }
@@ -1096,8 +1118,8 @@ border-radius: 8px;
   padding: 0.6rem 1.2rem;           
   border: none;
   border-radius: 9999px;           
-  background: #e53e3e;             
-  color: #fff;
+  background-color: #e90202;
+    color: white;
   font-weight: 600;
   font-size: 0.95rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -1108,7 +1130,6 @@ border-radius: 8px;
   transform: translateY(-1px);
 }
 .cart-item__subtotal {
-  margin-left: 1rem;
   font-weight: bold;
   white-space: nowrap;
 }
@@ -1150,15 +1171,15 @@ border-radius: 8px;
 }
 
 .cart-btn-clear {
-  background: #f56565;          
-  color: #fff;
+  background-color: #ff4d4d;
+    color: white;
 }
 .cart-btn-clear:hover {
   background: #e53e3e;          
   transform: translateY(-1px);
 }
 .cart-btn-purchase {
-  background: #38b2ac;          
+  background-color: #059297;         
   color: #fff;
 }
 .cart-btn-purchase:hover {

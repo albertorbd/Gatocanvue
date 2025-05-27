@@ -20,7 +20,7 @@
         
         <v-col cols="12" md="6" class="pa-4 d-flex pl-10 flex-column justify-center">
           <div class="contact-info">
-            <h2 class="text-h4 font-weight-bold mb-4">Contacta con nosotros</h2>
+            <h3 class="font-weight-bold mb-4">Contacta con nosotros</h3>
             <p class="mb-3 pt-6">
               <strong>Dirección:</strong><br />
               C. de Florentino Ballesteros, 15, 50002 Zaragoza

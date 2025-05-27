@@ -3,9 +3,9 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" md="8">
-          <h2 class="text-h4 font-weight-bold text-center mb-6">
+          <h3 class="font-weight-bold text-center mb-6">
             Haznos tu consulta o pide cita
-          </h2>
+          </h3>
 
           <v-form @submit.prevent="submitForm">
             <v-text-field
@@ -38,7 +38,7 @@
               class="mb-6"
               required
             />
-            <v-btn type="submit" color="red darken-1" dark large block>
+            <v-btn type="submit" class="contact-btn-submit" dark large block>
               Enviar mensaje
             </v-btn>
           </v-form>

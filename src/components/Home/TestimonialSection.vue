@@ -1,6 +1,6 @@
 <template>
   <section class="home-testimonials-section py-12">
-    <h2 class="text-h4 font-weight-bold text-center mb-10">Lo que dicen nuestros clientes</h2>
+    <h2 class="font-weight-bold text-center mb-10">Lo que dicen nuestros clientes</h2>
     <v-container>
       <v-row justify="center" align="stretch" dense class="px-6">
         <transition-group name="testi" tag="div" class="d-flex flex-wrap justify-center">

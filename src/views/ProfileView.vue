@@ -10,7 +10,7 @@
       <p class="profile-email">{{ userStore.profile?.email }}</p>
     </v-col>
     <v-col cols="12" md="4" class="text-md-right">
-      <v-btn color="red" @click="showEdit = true">
+      <v-btn class="profile-edit-btn" @click="showEdit = true">
         Editar perfil
       </v-btn>
     </v-col>
@@ -26,7 +26,6 @@
         </span>
         <v-btn
           icon
-          color="red"
           @click="showPhoneEdit = true"
           class="profile-edit-btn"
         >
@@ -42,7 +41,6 @@
         </span>
         <v-btn
           icon
-          color="red"
           @click="showAddressEdit = true"
           class="profile-edit-btn"
         >
@@ -62,7 +60,7 @@
             <div class="profile-balance-amount">{{ balance.toFixed(2) }}€</div>
           </div>
           <v-spacer />
-         <v-btn color="red" dark class="profile-add-balance" @click="goToDepositPage">+</v-btn>
+         <v-btn  dark class="profile-add-balance" @click="goToDepositPage">+</v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -91,9 +89,9 @@
             contain
           />
           <v-card-text class="text-center px-2">
-            <div class="profile-transaction-name text-lg font-semibold mb-1">
+            <h6 class="profile-transaction-name text-lg font-semibold mb-2">
               {{ t.product.name }}
-            </div>
+            </h6>
             <div class="profile-transaction-quantity text-gray-600 text-sm">
               Cantidad: {{ t.quantity }}
             </div>
@@ -103,7 +101,7 @@
           </v-card-text>
           <v-card-actions class="justify-center">
             <v-btn
-              color="red"
+             
               variant="flat"
               class="profile-repetir-btn"
               @click="repeatOrder(t)"
@@ -125,13 +123,12 @@
    
     <v-row class="mt-14 " justify="start">
       <v-col cols="12" class="d-flex">
-        <v-btn color="red" class="mr-2 profile-close-session-link" @click="logout">CERRAR SESIÓN</v-btn>
-        <v-btn color="red" class="mr-2 profile-delete-link" @click.prevent="deleteAccount">
+        <v-btn  class="mr-2 profile-close-session-link" @click="logout">CERRAR SESIÓN</v-btn>
+        <v-btn  class="mr-2 profile-delete-link" @click.prevent="deleteAccount">
           ELIMINAR CUENTA
         </v-btn>
         <v-btn
           v-if="authStore.user?.role === 'admin'"
-          color="red"
           class="profile-admin-link"
           @click="goAdmin"
         >
@@ -441,17 +438,21 @@ async function submitAddressEdit() {
 .profile-balance-label {
   font-weight: 500;
   color: #555;
+  font-family: 'Open Sans', sans-serif;
 }
 .profile-balance-amount {
   font-size: 1.4rem;
   font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
 }
 .profile-add-balance {
   margin-left: auto;
   font-size: 20px;
+  background-color: #e90202; 
+  color: #fff;
 }
 .profile-section-title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
@@ -475,28 +476,35 @@ async function submitAddressEdit() {
   font-style: italic;
 }
 .profile-delete-link {
-  color: #e53e3e;
   text-transform: none;
+   background-color: #e90202; 
+  color: #fff;
 }
 .profile-delete-link:hover {
   text-decoration: underline;
+  background-color: #e05151;
 }
 
 .profile-admin-link{
-   color: #e53e3e;
   text-transform: none;
+  background-color: #e90202; 
+  color: #fff;
 }
 
 .profile-admin-link:hover {
   text-decoration: underline;
+   background-color: #e05151;
 }
 
 .profile-close-session-link{
     color: #e53e3e;
   text-transform: none;
+   background-color: #e90202; 
+  color: #fff;
 }
 .profile-close-session-link:hover {
-  text-decoration: underline;
+  background-color: #e05151;
+   text-decoration: underline;
 }
 
 .profile-field {
@@ -509,16 +517,24 @@ async function submitAddressEdit() {
   font-weight: bold;
   margin-right: 8px;
   font-size: 20px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .profile-value {
   flex-grow: 1;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .profile-edit-btn {
   margin-left: 5px;
-  font-size: 10px;
+  font-size: 14px;
+  background-color: #e90202; 
+  color: #fff;
+}
+
+.profile-edit-btn:hover{
+  background-color: #d35353; 
 }
 .profile-transaction-card {
   margin: 12px;      
@@ -536,12 +552,15 @@ async function submitAddressEdit() {
   box-shadow: none !important;
 }
 .profile-transaction-name { 
-  font-size: 1.1rem;
-   font-weight: 500; 
+  font-size: 19px !important;
+   font-weight: 600; 
+   
+   
 }
 .profile-transaction-quantity,
 .profile-transaction-price {
-   font-size: 0.85rem;
+   font-size: 16px;
+   
    color: #777;
     }
 
@@ -551,11 +570,16 @@ async function submitAddressEdit() {
   border-radius: 8px; 
   font-weight: 500;
   font-size: 14px; 
-  padding: 10px 20px; 
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 30px; 
   transition: all 0.3s ease; 
+   background-color: #e90202; 
+  color: #fff;
 }
 .profile-repetir-btn:hover{
-  background-color: #020000; 
+  background-color: #d35353; 
   transform: translateY(-2px); 
 }
 

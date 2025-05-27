@@ -16,7 +16,6 @@
 
       <v-btn
         class="detail-add-to-cart-btn"
-        color="red"
         dark
         large
         @click="$emit('add')"
@@ -105,5 +104,11 @@ const emit = defineEmits<{
 .detail-add-to-cart-btn {
   align-self: flex-start;
   margin-top: auto;
+  background-color: #e90202;
+  color: #fff;
 }
+
+.detail-add-to-cart-btn:hover{
+ background-color: #ca4848  ; 
+} 
 </style>

@@ -4,8 +4,8 @@
       <v-avatar size="200" class="mx-auto mb-4">
         <v-img :src="img" :alt="alt" />
       </v-avatar>
-      <div class="text-h6 font-weight-bold mb-1">{{ name }}</div>
-      <div class="subtitle-2 text--secondary">{{ role }}</div>
+      <h6 class=" font-weight-bold mb-1">{{ name }}</h6>
+      <p class="">{{ role }}</p>
     </v-card>
   </v-col>
 </template>

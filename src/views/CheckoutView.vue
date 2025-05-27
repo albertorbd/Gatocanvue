@@ -1,5 +1,5 @@
 <template>
-  
+  <div class="checkout-background">
   <v-container class="checkout-page" v-if="cart && cart.items.length">
     <v-row no-gutters>
       <v-col cols="12" md="7">
@@ -36,8 +36,8 @@
       <v-col cols="12" md="5" class="pl-md-6">
         <v-card outlined class="mb-6 pa-4">
           <div class="d-flex justify-space-between align-center mb-2">
-            <h3 class="checkout-title mb-0">Datos de envío</h3>
-            <v-btn small color="error" @click="startEdit">Editar</v-btn>
+            <h5 class="checkout-title mb-0">Datos de envío</h5>
+            <v-btn small class="checkout-edit-btn" @click="startEdit">Editar</v-btn>
           </div>
           <template v-if="!isEditing">
             <p class="checkout-cursiva mb-1">{{ userStore.profile?.address || '—' }}</p>
@@ -67,7 +67,7 @@
           </template>
         </v-card>
         <v-card outlined class="mb-4 pa-4">
-          <h3 class="section-title mb-3">Método de pago</h3>
+          <h5 class="section-title mb-3">Método de pago</h5>
           <v-chip-group
             v-model="paymentMethod"
             column
@@ -93,21 +93,22 @@
     Rellena tu dirección de envío para activar el pago con tarjeta.
     </v-alert>
   </div>
-      <v-btn
+      <v-btn class="checkout-confirm-btn"
       v-if="paymentMethod === 'balance'"
       :loading="processing"
       block
-      color="error"
       large
       @click="confirmCheckout">Confirmar pedido</v-btn>
       </v-col>
     </v-row>
   </v-container>
+  
 
   
   <div v-else class="text-center pa-8">
     <p>Tu carrito está vacío.</p>
   </div>
+</div>
 
   
   <v-snackbar
@@ -125,6 +126,8 @@
   <div v-if="alertMsg.show" class="checkout-custom-alert">
     {{ alertMsg.message }}
   </div>
+
+  
 </template>
 
 <script setup lang="ts">
@@ -271,11 +274,15 @@ function showAlert(message: string) {
 </script>
 
 <style scoped>
+.checkout-background{
+  background-color: #f5f5f5;
+}
 .checkout-page { 
   max-width: 960px;
    margin: 0 auto;
    padding-bottom: 120px !important;
    padding-top: 120px!important;
+  
   }
 .checkout-cart-card { 
   background: #fff;
@@ -299,8 +306,22 @@ function showAlert(message: string) {
     margin-right: 16px; 
     object-fit: contain; 
   }
+.checkout-edit-btn{
+  background-color: #e90202;
+  color: white;
+}
 
- 
+.checkout-edit-btn:hover{
+   background-color: #cf4a4a;
+}
+ .checkout-confirm-btn{
+  background-color: #e90202;
+    color: white;
+ }
+
+ .checkout-confirm-btn:hover{
+  background-color: #cf4a4a;
+ }
 .checkout-cart-card__total { 
   display: flex;
    justify-content: 
@@ -310,14 +331,13 @@ function showAlert(message: string) {
    border-top: 1px solid #f0f0f0;
    }
 .checkout-cart-card__amount { 
-  font-size: 17px;
+  font-size: 16px;
    font-weight: 700;
+   padding-left: 5px;
     color: #e53935;
    }
 .checkout-title {
-   font-size: 1.2rem;
-    font-weight: 500; 
-    margin-bottom: 0.5rem;
+ margin-bottom: 0.5rem;
    }
 .checkout-cursiva {
    font-style: italic;

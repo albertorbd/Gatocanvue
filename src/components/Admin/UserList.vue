@@ -1,6 +1,6 @@
 <template>
     <div class="admin-user-list">
-      <h2>Gestión de Usuarios</h2>
+      <h4 class="admin-user-gestion">Gestión de Usuarios</h4>
       <table>
         <thead>
           <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Rol</th></tr>

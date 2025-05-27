@@ -1,6 +1,6 @@
 <template>
   <section class="about-us-faq-section py-12">
-    <h2 class="text-h2 font-weight-bold text-center mb-8">Preguntas Frecuentes</h2>
+    <h2 class="font-weight-bold text-center mb-8">Preguntas Frecuentes</h2>
     <v-container>
       <v-row dense>
         <v-col cols="12" md="8" class="mx-auto">
@@ -10,9 +10,9 @@
             class="about-us-faq-item mb-6 pa-4"
           >
             <div class="d-flex justify-space-between align-center">
-              <div class="text-subtitle-1 font-weight-medium">
+              <p class="font-weight-bold">
                 {{ item.question }}
-              </div>
+              </p>
               <v-btn
                 icon
                 small
@@ -24,9 +24,9 @@
                 </span>
               </v-btn>
             </div>
-            <div v-if="item.open" class="mt-4">
+            <p v-if="item.open" class="mt-4">
               {{ item.answer }}
-            </div>
+            </p>
           </div>
         </v-col>
       </v-row>

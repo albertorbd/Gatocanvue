@@ -11,7 +11,7 @@
     <nav class="footer__nav">
       <h4 class="footer__title">Enlaces útiles</h4>
       <ul class="footer__list">
-        <li><a href="/productos">Productos</a></li>
+        <li><a href="/products">Productos</a></li>
         <li><a href="/about-us">Sobre Nosotros</a></li>
         <li><a href="/contact">Contáctanos</a></li>
 
